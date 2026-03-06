@@ -368,6 +368,86 @@ a:focus-visible {
   height: 100%;
 }
 
+.hero-section::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.5) 100%);
+	pointer-events: none;
+	z-index: 10;
+}
+
+@media screen and (max-width: 52.99em) {
+	:root {
+		font-size: 10.5px;
+	}
+	.frame {
+		grid-template-areas:
+			'site site menu'
+			'works works works'
+			'content content content'
+			'title title title';
+		grid-template-columns: 1fr 1fr auto;
+		grid-template-rows: auto auto 1fr auto;
+		padding: 1.5rem;
+		gap: 1.5rem;
+		min-height: 100dvh;
+	}
+	.frame__tagline,
+	.frame__year,
+	.frame__contact,
+	.frame__links {
+		display: none;
+	}
+	.frame__works {
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 0.5rem 1rem;
+		padding-top: 2rem;
+	}
+	.frame__works span {
+		width: 100%;
+		margin-bottom: 0.25rem;
+		font-size: 0.75rem;
+		letter-spacing: 0.2em;
+		opacity: 0.6;
+		font-weight: 600;
+	}
+	.frame__works a {
+		font-size: 0.85rem;
+		padding: 0.2rem 0;
+		opacity: 0.7;
+		text-decoration: none;
+		border-bottom: 1px solid transparent;
+	}
+	.frame__works a:hover,
+	.frame__works a.current {
+		opacity: 1;
+		border-color: currentColor;
+	}
+	.frame__title-main {
+		font-size: clamp(2.2rem, 8vw, 4rem);
+		line-height: 1.1;
+		align-content: end;
+		padding-bottom: 3rem;
+		font-weight: 700;
+	}
+	.frame__title-main span:last-child {
+		margin-left: 0;
+		display: block;
+	}
+	.content__title {
+		font-size: clamp(1.8rem, 7vw, 3.5rem);
+		padding: 0 1rem;
+	}
+	.frame__menu {
+		width: 28px;
+	}
+}
+
 @media screen and (min-width: 53em) {
 	body {
 		--page-padding: 2.5rem;
