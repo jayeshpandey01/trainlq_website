@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="js/page-transition.js"></script>
+    <script type="module" src="js/auth.js"></script>
     <style>
         body { font-family: "Onest", sans-serif; }
 
@@ -112,7 +113,9 @@
             <img src="media/logo.png" alt="TrainIQ" class="h-7 w-7" style="filter: invert(1); mix-blend-mode: screen;">
             TrainIQ
         </a>
-        <a href="index.html" class="text-sm text-neutral-400 hover:text-white transition-colors">Back to Home</a>
+        <div id="auth-container">
+            <a href="index.html" class="text-sm text-neutral-400 hover:text-white transition-colors">Back to Home</a>
+        </div>
     </header>
 
     <!-- Main Content -->

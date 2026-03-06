@@ -16,6 +16,7 @@
 		<script src="https://cdn.tailwindcss.com"></script>
 		<link rel="stylesheet" type="text/css" href="css/base.css" />
 		<script defer src="js/page-transition.js"></script>
+		<script type="module" src="js/auth.js"></script>
 		<script>document.documentElement.className="js";</script>
 	</head>
 	<body class="loading bg-black text-[#ececec]">
@@ -34,10 +35,10 @@
 					<a href="research.html" class="hover:text-white transition-colors text-blue-400">WebResearch</a>
 					<a href="models.html" class="hover:text-white transition-colors">Model Training</a>
 				</div>
-				<div class="flex items-center gap-4">
+				<div class="flex items-center gap-4" id="auth-container">
 					<a href="https://github.com/jayeshpandey01/TrainIQ" target="_blank" class="text-sm font-medium text-neutral-300 hover:text-white transition-colors hidden md:block">GitHub</a>
 					<a href="login.html" class="bg-white text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-neutral-200 transition-colors">Log in</a>
-					<!-- Mobile Hamburger -->
+				</div>	<!-- Mobile Hamburger -->
 					<button id="mobileMenuBtn" class="md:hidden text-white p-1" aria-label="Toggle menu">
 						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
 					</button>

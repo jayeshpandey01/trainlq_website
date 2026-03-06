@@ -81,21 +81,8 @@
 
     <!-- Firebase Authentication Logic -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyCOpxVZ68e8H3_wA5E59mEvizaunIe3-1Q",
-            authDomain: "trainlq.firebaseapp.com",
-            projectId: "trainlq",
-            storageBucket: "trainlq.firebasestorage.app",
-            messagingSenderId: "1031179454445",
-            appId: "1:1031179454445:web:a5013a5b19e70dea8709e4",
-            measurementId: "G-EWFWYW20QL"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+        import { auth } from "./js/auth.js";
+        import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
         const errorDiv = document.getElementById('authError');
         const submitBtn = document.querySelector('#loginForm button[type="submit"]');
