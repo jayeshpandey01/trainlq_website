@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TrainIQ | AI WebResearch Engine</title>
+    <meta name="description" content="Discover TrainIQ's flagship AI Research Assistant. Scrape, synthesize, and summarize web content using local LLMs." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="js/page-transition.js"></script>
+    <style>
+        body {
+            font-family: "Onest", sans-serif;
+            font-optical-sizing: auto;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+<body class="bg-black text-[#ececec] min-h-screen flex flex-col font-['Onest']">
+
+    <!-- Top Global Header (OpenAI Logo & Login style) -->
+    <header class="w-full h-16 flex items-center justify-between px-6 border-b border-neutral-800/50 bg-black fixed top-0 z-[2000]">
+        <div class="flex items-center gap-4">
+            <a href="index.html" class="text-2xl font-bold tracking-tight text-white hover:text-neutral-300 transition-colors flex items-center gap-2">
+                TrainIQ
+                <div class="w-4 h-4 border border-neutral-600 rounded-[4px]"></div>
+            </a>
+        </div>
+        <div class="flex items-center gap-4">
+            <button class="text-neutral-400 hover:text-white transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </button>
+            <a href="login.html" class="bg-white/10 hover:bg-white/20 text-white px-4 py-1.5 rounded-full text-sm font-medium transition-colors backdrop-blur-md border border-white/10">Log in</a>
+        </div>
+    </header>
+
+    <!-- Main Application Layout -->
+    <div class="flex flex-1 mt-16 relative">
+        
+        <!-- Left Sidebar Navigation -->
+        <aside class="w-64 fixed left-0 top-16 bottom-0 overflow-y-auto bg-black border-r border-neutral-800/50 p-4 hidden lg:block custom-scrollbar z-40">
+            <a href="index.html" class="flex items-center gap-2 text-neutral-400 text-sm font-medium mb-8 hover:text-white transition-colors px-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back to Home
+            </a>
+            
+            <nav class="space-y-1">
+                <div class="px-3 pb-2 pt-4 text-xs font-semibold text-neutral-500 uppercase tracking-wider">WebResearch Engine</div>
+                <a href="#quickstart" class="block px-3 py-2 rounded-lg bg-neutral-800/50 text-white text-sm font-medium transition-colors">Quick Start</a>
+                <a href="#cli" class="block px-3 py-2 rounded-lg text-neutral-400 hover:bg-neutral-800/30 hover:text-white text-sm font-medium transition-colors">CLI Usage</a>
+
+                <a href="models.html" class="block px-3 py-2 mt-6 rounded-lg text-blue-400 hover:bg-blue-500/10 hover:text-blue-300 text-sm font-medium transition-colors">Model Training</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area (Documentation/Blog) -->
+        <main class="flex-1 lg:ml-64 bg-black min-h-full">
+            <div class="max-w-4xl mx-auto px-8 py-16 pb-32">
+                
+                <!-- Intro Section -->
+                <section id="introduction" class="mb-20">
+                    <h1 class="text-4xl md:text-6xl font-semibold tracking-tight text-white mb-6">TrainIQ <span class="text-neutral-500 font-light">WebResearch</span></h1>
+                    <p class="text-xl text-neutral-400 font-light leading-relaxed mb-8">
+                        The flagship AI Research Assistant. Find and synthesize real-time information from the web automatically using TrainIQ's headless browser scraping technology.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://github.com/jayeshpandey01/TrainIQ" target="_blank" class="bg-neutral-800 hover:bg-neutral-700 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-colors border border-neutral-700">View on GitHub</a>
+                    </div>
+                </section>
+
+                <hr class="border-neutral-800/50 mb-16" />
+
+                <!-- AI Research Engine Quick Start Section -->
+                <section id="quickstart" class="mb-20 relative">
+                    <div class="absolute -left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full opacity-50 hidden lg:block"></div>
+                    <span class="px-3 py-1 text-xs font-semibold bg-blue-500/10 text-blue-400 rounded-full mb-4 inline-block">NEW IN v0.1.3</span>
+                    <h2 class="text-2xl font-semibold text-white mb-6 border-b border-neutral-800 pb-4">AI Research Assistant</h2>
+                    <p class="text-neutral-400 leading-relaxed mb-6">
+                        The WebResearch Engine helps you find and synthesize information from the web using AI. With built-in support for HuggingFace and local Ollama models.
+                    </p>
+                    <div class="bg-[#111] p-6 rounded-xl border border-neutral-800">
+                        <pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code><span class="text-purple-400">from</span> trainiq <span class="text-purple-400">import</span> research
+
+<span class="text-neutral-500"># Basic research query</span>
+results = research(
+    query=<span class="text-green-400">"What are the latest advances in computer vision?"</span>,
+    llm_provider=<span class="text-green-400">"huggingface"</span>,
+    llm_model=<span class="text-green-400">"google/flan-t5-base"</span>,
+    max_sources=<span class="text-orange-400">5</span>,
+    research_mode=<span class="text-green-400">"academic"</span>
+)
+
+<span class="text-blue-400">print</span>(<span class="text-green-400">f"Answer: {results['answer']}"</span>)</code></pre>
+                    </div>
+                </section>
+
+                <!-- CLI Usage Section -->
+                <section id="cli" class="mb-20">
+                    <h2 class="text-2xl font-semibold text-white mb-6 border-b border-neutral-800 pb-4">💻 CLI Usage</h2>
+                    <p class="text-neutral-400 leading-relaxed mb-6">
+                        Execute research workflows directly from the terminal without writing a script.
+                    </p>
+                    <div class="bg-[#111] p-6 rounded-xl border border-neutral-800 space-y-6">
+                        <div>
+                            <p class="text-neutral-500 text-xs mb-2 uppercase font-semibold">AI Research Search</p>
+                            <code class="text-green-400 font-mono text-sm block bg-black p-3 rounded border border-neutral-800">trainiq research "What is AI?" --llm-provider huggingface --llm google/flan-t5-base</code>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Cookie Footer (Matching the image) -->
+            <!-- <div class="mt-auto border-t border-neutral-800 bg-[#1e1e1e] p-6 lg:px-12">
+                <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+                    <div class="max-w-3xl">
+                        <h4 class="text-white font-medium text-sm mb-2">We use cookies</h4>
+                        <p class="text-xs text-neutral-400 leading-relaxed">
+                            We use cookies to help this site function, understand service usage, and support marketing efforts. Visit <a href="#" class="underline hover:text-white">Manage Cookies</a> to change preferences anytime. View our <a href="#" class="underline hover:text-white">Cookie Policy</a> for more info.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-3 w-full lg:w-auto shrink-0 mt-4 lg:mt-0">
+                        <button class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full text-xs font-medium transition-colors border border-white/5">Manage Cookies</button>
+                        <button class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full text-xs font-medium transition-colors border border-white/5">Reject non-essential</button>
+                        <button class="bg-white hover:bg-neutral-200 text-black px-4 py-2 rounded-full text-xs font-medium transition-colors">Accept all</button>
+                    </div>
+                </div>
+            </div> -->
+        </main>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+	<html lang="en" class="no-js scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>TrainIQ | AutoML Framework</title>
+		<meta name="description" content="A grid item reveal animation on hover inspired by Metalab" />
+		<meta name="keywords" content="grid hover animation, gsap, hover effect grid, metalab hover" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<script defer src="js/page-transition.js"></script>
+		<script>document.documentElement.className="js";</script>
+	</head>
+	<body class="loading bg-black text-[#ececec]">
+		<!-- Sticky Navigation Bar -->
+		<nav class="fixed top-0 left-0 w-full z-[2000] bg-black/80 backdrop-blur-md border-b border-neutral-800 transition-all duration-300">
+			<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+				<div class="flex items-center gap-2">
+					<a href="#" class="text-xl font-bold tracking-tight text-white hover:text-blue-400 transition-colors">TrainIQ</a>
+				</div>
+				<div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-300">
+					<a href="index.html" class="hover:text-white transition-colors">Home</a>
+					<a href="#features" class="hover:text-white transition-colors">Features</a>
+					<a href="research.html" class="hover:text-white transition-colors text-blue-400">WebResearch</a>
+					<a href="models.html" class="hover:text-white transition-colors">Model Training</a>
+				</div>
+				<div class="flex items-center gap-4">
+					<a href="https://github.com/jayeshpandey01/TrainIQ" target="_blank" class="text-sm font-medium text-neutral-300 hover:text-white transition-colors hidden md:block">GitHub</a>
+					<a href="login.html" class="bg-white text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-neutral-200 transition-colors">Log in</a>
+				</div>
+			</div>
+		</nav>
+
+		<!-- The TrainIQ Hero Section featuring HoverGrid Animation -->
+		<section class="hero-section" style="position: relative; height: 100vh; overflow: hidden; width: 100vw;">
+			<main>
+				<div class="frame">
+					<nav class="frame__works">
+						<span>Core Features</span>
+						<a href="#content-1">Automatic Everything</a>
+						<a href="#content-2">One-Line Training</a>
+						<a href="#content-3">Multi-Modal Data</a>
+						<a href="#content-4">AI Research Engine</a>
+						<a href="#content-5">Instant Deployment</a>
+					</nav>
+					<h2 class="frame__title-main"><span>Build</span> <span>Intelligent</span><br/><span>ML Pipelines</span></h2>
+					<div class="frame__content">
+						<div class="content" id="content-1" data-bg="bg-1">
+							<h2 class="content__title">Automatic Everything</h2>
+							<div class="content__img pos-1" data-dir="right"><div class="content__img-inner" style="background-image:url(media/1.jpg)"></div></div>
+							<div class="content__img pos-2" data-dir="left"><div class="content__img-inner" style="background-image:url(media/2.jpg)"></div></div>
+							<div class="content__img pos-3" data-dir="top"><div class="content__img-inner" style="background-image:url(media/3.jpg)"></div></div>
+						</div>
+						<div class="content" id="content-2" data-bg="bg-2">
+							<h2 class="content__title">One-Line Training</h2>
+							<div class="content__img pos-4" data-dir="bottom"><div class="content__img-inner" style="background-image:url(media/4.jpg)"></div></div>
+							<div class="content__img pos-5" data-dir="right"><div class="content__img-inner" style="background-image:url(media/5.jpg)"></div></div>
+							<div class="content__img pos-6" data-dir="right"><div class="content__img-inner" style="background-image:url(media/6.jpg)"></div></div>
+						</div>
+						<div class="content" id="content-3" data-bg="bg-3">
+							<h2 class="content__title">Multi-Modal Data</h2>
+							<div class="content__img pos-7" data-dir="right"><div class="content__img-inner" style="background-image:url(media/7.jpg)"></div></div>
+							<div class="content__img pos-8" data-dir="bottom"><div class="content__img-inner" style="background-image:url(media/8.jpg)"></div></div>
+							<div class="content__img pos-9" data-dir="left"><div class="content__img-inner" style="background-image:url(media/9.jpg)"></div></div>
+						</div>
+						<div class="content" id="content-4" data-bg="bg-4">
+							<h2 class="content__title">AI Research Engine</h2>
+							<div class="content__img pos-10" data-dir="left"><div class="content__img-inner" style="background-image:url(media/10.jpg)"></div></div>
+							<div class="content__img pos-11" data-dir="right"><div class="content__img-inner" style="background-image:url(media/11.jpg)"></div></div>
+							<div class="content__img pos-12" data-dir="right"><div class="content__img-inner" style="background-image:url(media/12.jpg)"></div></div>
+						</div>
+						<div class="content" id="content-5" data-bg="bg-5">
+							<h2 class="content__title">Instant Deployment</h2>
+							<div class="content__img pos-13" data-dir="right"><div class="content__img-inner" style="background-image:url(media/13.jpg)"></div></div>
+							<div class="content__img pos-14" data-dir="bottom"><div class="content__img-inner" style="background-image:url(media/14.jpg)"></div></div>
+							<div class="content__img pos-15" data-dir="right"><div class="content__img-inner" style="background-image:url(media/15.jpg)"></div></div>
+						</div>
+					</div>
+				</div>
+			</main>
+			<div class="background">
+				<div id="bg-1" class="background__image" style="background-image:url(media/beige1.jpg)"></div>
+				<div id="bg-2" class="background__image" style="background-image:url(media/red1.jpg)"></div>
+				<div id="bg-3" class="background__image" style="background-image:url(media/pink.jpg)"></div>
+				<div id="bg-4" class="background__image" style="background-image:url(media/beige2.jpg)"></div>
+				<div id="bg-5" class="background__image" style="background-image:url(media/red2.jpg)"></div>
+				<video autoplay muted loop class="background__video">
+					<source src="media/bg-video.mp4" type="video/mp4">
+					Your browser does not support the video tag.
+				</video>
+			</div>
+		</section>
+
+		<!-- Trusted By Section -->
+		<section class="py-20 border-b border-neutral-800">
+			<div class="max-w-7xl mx-auto px-6 text-center">
+				<p class="text-sm text-neutral-400 uppercase tracking-widest mb-8">Trusted by developers building the future</p>
+				<div class="flex flex-wrap justify-center gap-12 opacity-50 contrast-0 grayscale transition-all hover:grayscale-0 hover:opacity-100 duration-500">
+					<!-- Dummy logos representing typical ML stack trust -->
+					<h3 class="text-2xl font-bold tracking-tight">PyTorch</h3>
+					<h3 class="text-2xl font-bold tracking-tight">Scikit-Learn</h3>
+					<h3 class="text-2xl font-bold tracking-tight">Optuna</h3>
+					<h3 class="text-2xl font-bold tracking-tight">FastAPI</h3>
+					<h3 class="text-2xl font-bold tracking-tight">HuggingFace</h3>
+				</div>
+			</div>
+		</section>
+
+		<!-- Features & Code Section -->
+		<section id="features" class="py-32">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+					<div>
+						<h2 class="text-4xl md:text-5xl font-light tracking-tight mb-6">One-Line Training.<br/><span class="text-neutral-500">Zero Configuration.</span></h2>
+						<p class="text-xl text-neutral-400 mb-8 font-light leading-relaxed">
+							TrainIQ automatically detects your data types, tasks, and selects the best model architecture—whether it's tabular, image, text, or time-series data.
+						</p>
+						<ul class="space-y-4 text-neutral-300">
+							<li class="flex items-center gap-3">
+								<svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+								Built-in Optuna Hyperparameter Tuning
+							</li>
+							<li class="flex items-center gap-3">
+								<svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+								Rich Model Zoo (ResNet, BERT, XGBoost)
+							</li>
+							<li class="flex items-center gap-3">
+								<svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+								Export to ONNX & TorchScript instantly
+							</li>
+						</ul>
+					</div>
+					<div class="bg-[#111] p-8 rounded-2xl border border-neutral-800 shadow-2xl relative overflow-hidden group">
+						<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+						<div class="flex items-center gap-2 mb-4">
+							<div class="w-3 h-3 rounded-full bg-red-500"></div>
+							<div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+							<div class="w-3 h-3 rounded-full bg-green-500"></div>
+							<span class="ml-2 text-xs text-neutral-600 font-mono">train.py</span>
+						</div>
+						<pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code><span class="text-purple-400">from</span> trainiq <span class="text-purple-400">import</span> trainiq, trainiqConfig
+
+<span class="text-neutral-500"># 1. Configure</span>
+config = trainiqConfig(
+    data_path=<span class="text-green-400">"data.csv"</span>,
+    target_column=<span class="text-green-400">"label"</span>,
+    epochs=<span class="text-orange-400">50</span>
+)
+
+<span class="text-neutral-500"># 2. Train</span>
+model = trainiq(config)
+results = model.train()
+
+<span class="text-neutral-500"># 3. Export</span>
+model.export(format=<span class="text-green-400">"onnx"</span>)</code></pre>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Interactive Demo / Research Engine Section -->
+		<section id="research" class="py-32 bg-[#0a0a0a] border-y border-neutral-800">
+			<div class="max-w-7xl mx-auto px-6 text-center">
+				<span class="px-3 py-1 text-xs font-semibold bg-blue-500/10 text-blue-400 rounded-full mb-6 inline-block">NEW IN v0.1.3</span>
+				<h2 class="text-4xl md:text-5xl font-light tracking-tight mb-6">AI Research Engine</h2>
+				<p class="text-xl text-neutral-400 max-w-2xl mx-auto mb-16 font-light">
+					Built-in web scraper and RAG engine that uses Ollama or HuggingFace to answer complex ML architecture questions.
+				</p>
+				
+				<div class="max-w-3xl mx-auto bg-black border border-neutral-800 rounded-2xl p-2 md:p-4 text-left shadow-2xl">
+					<div class="p-4 border-b border-neutral-800 flex items-center gap-4">
+						<div class="flex-1 bg-[#111] rounded-lg p-3 flex items-center gap-3 border border-neutral-800">
+							<svg class="w-5 h-5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+							<span class="text-neutral-300 text-sm font-mono">trainiq research "What is transfer learning?" --llm-provider huggingface</span>
+						</div>
+						<button class="bg-white text-black px-6 py-3 rounded-lg font-medium hover:bg-neutral-200 transition-colors hidden md:block">Execute</button>
+					</div>
+					<div class="p-6">
+						<div class="flex items-start gap-4 mb-6">
+							<div class="w-8 h-8 rounded bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0 text-white font-bold text-xs">AI</div>
+							<div>
+								<p class="text-neutral-300 text-sm leading-relaxed mb-4">Transfer learning in deep learning consists of taking features learned on one problem, and leveraging them on a new, similar problem. For instance, features from a model that has learned to identify raccoons may be useful to kick-start a model meant to identify ninjas.</p>
+								<div class="flex gap-2">
+									<a href="#" class="text-xs bg-neutral-900 border border-neutral-800 text-neutral-400 px-2 py-1 rounded hover:bg-neutral-800 transition-colors">Source: PyTorch Docs</a>
+									<a href="#" class="text-xs bg-neutral-900 border border-neutral-800 text-neutral-400 px-2 py-1 rounded hover:bg-neutral-800 transition-colors">Source: arXiv</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Blog / Tutorials -->
+		<section id="blog" class="py-32">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="flex justify-between items-end mb-12">
+					<div>
+						<h2 class="text-3xl font-light tracking-tight mb-2">Learn & Build</h2>
+						<p class="text-neutral-400">Step-by-step guides for using TrainIQ.</p>
+					</div>
+					<a href="models.html" class="text-blue-400 hover:text-blue-300 hidden md:block">View all docs &rarr;</a>
+				</div>
+				
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<!-- Post 1 -->
+					<a href="models.html"><div class="group cursor-pointer">
+						<div class="aspect-video bg-neutral-900 rounded-xl mb-6 overflow-hidden relative">
+							<div class="absolute inset-0 bg-[url('media/1.jpg')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-500 group-hover:scale-105"></div>
+						</div>
+						<div class="flex gap-2 mb-3">
+							<span class="text-xs font-medium text-blue-400 bg-blue-400/10 px-2 py-1 rounded">AutoML</span>
+							<span class="text-xs text-neutral-500 py-1">5 min read</span>
+						</div>
+						<h3 class="text-xl font-medium mb-2 group-hover:text-blue-400 transition-colors">Getting Started with TrainIQ in 10 Minutes</h3>
+						<p class="text-neutral-400 text-sm">Learn how to build, train, and export your first machine learning model using a single line of Python.</p>
+					</div></a>
+
+					<!-- Post 2 -->
+					<a href="research.html"><div class="group cursor-pointer">
+						<div class="aspect-video bg-neutral-900 rounded-xl mb-6 overflow-hidden relative">
+							<div class="absolute inset-0 bg-[url('media/6.jpg')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-500 group-hover:scale-105"></div>
+						</div>
+						<div class="flex gap-2 mb-3">
+							<span class="text-xs font-medium text-purple-400 bg-purple-400/10 px-2 py-1 rounded">AI Tools</span>
+							<span class="text-xs text-neutral-500 py-1">8 min read</span>
+						</div>
+						<h3 class="text-xl font-medium mb-2 group-hover:text-blue-400 transition-colors">Using the WebResearch Engine for Data Discovery</h3>
+						<p class="text-neutral-400 text-sm">Harness the power of local Ollama models and HuggingFace to automate your ML literature review.</p>
+					</div></a>
+
+					<!-- Post 3 -->
+					<a href="models.html#model-zoo"><div class="group cursor-pointer md:hidden lg:block">
+						<div class="aspect-video bg-neutral-900 rounded-xl mb-6 overflow-hidden relative">
+							<div class="absolute inset-0 bg-[url('media/12.jpg')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-500 group-hover:scale-105"></div>
+						</div>
+						<div class="flex gap-2 mb-3">
+							<span class="text-xs font-medium text-green-400 bg-green-400/10 px-2 py-1 rounded">Deployment</span>
+							<span class="text-xs text-neutral-500 py-1">6 min read</span>
+						</div>
+						<h3 class="text-xl font-medium mb-2 group-hover:text-blue-400 transition-colors">Deploying ML Models with FastAPI Integration</h3>
+						<p class="text-neutral-400 text-sm">Export your trained models to ONNX and automatically generate a FastAPI scaffold for instant deployment.</p>
+					</div></a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer class="border-t border-neutral-800 py-12 bg-[#050505]">
+			<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+				<div class="flex items-center gap-2">
+					<span class="text-xl font-bold tracking-tight">TrainIQ <sup class="text-xs text-neutral-500 font-normal">v0.1.3</sup></span>
+				</div>
+				<div class="flex gap-8 text-sm text-neutral-400">
+					<a href="blog.html" class="hover:text-white transition-colors">Blog & Docs</a>
+					<a href="https://github.com/jayeshpandey01/TrainIQ" class="hover:text-white transition-colors">GitHub</a>
+					<a href="https://pypi.org/project/TrainIQ/" class="hover:text-white transition-colors">PyPI</a>
+				</div>
+				<div class="text-sm text-neutral-500">
+					Mickey &copy; 2026. MIT License.
+				</div>
+			</div>
+		</footer>
+		<script src="js/gsap.min.js"></script>
+		<!-- Image preloader -->
+		<script src="js/imagesloaded.pkgd.min.js"></script>
+		<script type="module" src="js/index.js"></script>
+	</body>
+</html>
