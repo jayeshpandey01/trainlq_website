@@ -16,8 +16,30 @@
 	--color-link-works-current: #ffffff;
 	--color-title: #ffffff;
 }
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-	display: none;
+	width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #262626;
+	border-radius: 10px;
+    border: 2px solid #000000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #404040;
+}
+
+/* Firefox Support */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #262626 #000000;
 }
 body {
 	margin: 0;

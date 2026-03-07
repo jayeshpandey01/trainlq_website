@@ -20,6 +20,66 @@
             -webkit-font-smoothing: antialiased;
         }
     </style>
+    <style>
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .accordion-content.open {
+            max-height: 2000px; /* Large enough to cover content */
+            opacity: 1;
+        }
+
+        .accordion-trigger svg {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-trigger.open svg {
+            transform: rotate(180deg);
+        }
+
+        .section-progress {
+            width: 4px;
+            height: 100%;
+            position: absolute;
+            left: -24px;
+            top: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 2px;
+            transition: background 0.3s ease;
+        }
+
+        .section-completed .section-progress {
+            background: #3b82f6;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        .mark-complete-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px border-neutral-800;
+            transition: all 0.2s ease;
+        }
+
+        .mark-complete-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mark-complete-btn.completed {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.5);
+            color: #3b82f6;
+        }
+
+        /* Glassmorphism for the progress float */
+        .progress-indicator-pill {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
 </head>
 <body class="bg-black text-[#ececec] min-h-screen flex flex-col font-['Onest']">
 
@@ -74,8 +134,10 @@
                 <div class="px-3 pb-2 pt-6 text-xs font-semibold text-neutral-500 uppercase tracking-wider">Reference</div>
                 <a href="#examples" class="block px-3 py-2 rounded-lg text-neutral-400 hover:bg-neutral-800/30 hover:text-white text-sm font-medium transition-colors">Code Examples</a>
                 <a href="#configuration" class="block px-3 py-2 rounded-lg text-neutral-400 hover:bg-neutral-800/30 hover:text-white text-sm font-medium transition-colors">Configuration</a>
+                <a href="#api-reference" class="block px-3 py-2 rounded-lg text-neutral-400 hover:bg-neutral-800/30 hover:text-white text-sm font-medium transition-colors">API Reference</a>
                 <a href="#cli" class="block px-3 py-2 rounded-lg text-neutral-400 hover:bg-neutral-800/30 hover:text-white text-sm font-medium transition-colors">CLI Usage</a>
                 <a href="#model-zoo" class="block px-3 py-2 rounded-lg text-neutral-400 hover:bg-neutral-800/30 hover:text-white text-sm font-medium transition-colors">Model Zoo</a>
+                <a href="#performance" class="block px-3 py-2 rounded-lg text-neutral-400 hover:bg-neutral-800/30 hover:text-white text-sm font-medium transition-colors">Performance</a>
                 <a href="#deployment" class="block px-3 py-2 rounded-lg text-neutral-400 hover:bg-neutral-800/30 hover:text-white text-sm font-medium transition-colors">Deployment</a>
 
                 <div class="px-3 pb-2 pt-6 text-xs font-semibold text-neutral-500 uppercase tracking-wider">Support</div>
@@ -102,46 +164,86 @@
                 <hr class="border-neutral-800/50 mb-16" />
 
                 <!-- Features Section -->
-                <section id="features" class="mb-20">
-                    <h2 class="text-2xl font-semibold text-white mb-6 border-b border-neutral-800 pb-4">Features</h2>
-                    <ul class="space-y-4 text-neutral-300">
-                        <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 mt-2 rounded-full bg-blue-500 shrink-0"></div> <div><strong class="text-white">Automatic Everything:</strong> Data type detection, task detection, model selection, preprocessing</div></li>
-                        <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 mt-2 rounded-full bg-blue-500 shrink-0"></div> <div><strong class="text-white">One-Line Training:</strong> Train state-of-the-art models with a single function call</div></li>
-                        <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 mt-2 rounded-full bg-blue-500 shrink-0"></div> <div><strong class="text-white">Hyperparameter Tuning:</strong> Built-in Optuna integration for automatic optimization</div></li>
-                        <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 mt-2 rounded-full bg-blue-500 shrink-0"></div> <div><strong class="text-white">AI Research Assistant:</strong> Built-in WebResearch Engine with Ollama & HuggingFace LLM support</div></li>
-                        <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 mt-2 rounded-full bg-blue-500 shrink-0"></div> <div><strong class="text-white">Easy Deployment:</strong> Export to ONNX/TorchScript + FastAPI scaffold generation</div></li>
-                    </ul>
+                <section id="features" class="mb-12 relative section-wrapper" data-section-id="features">
+                    <div class="section-progress"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <button class="accordion-trigger flex items-center gap-4 text-left group" onclick="toggleAccordion('features-content', this)">
+                            <h2 class="text-2xl font-semibold text-white group-hover:text-blue-400 transition-colors">Features</h2>
+                            <svg class="w-6 h-6 text-neutral-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <button class="mark-complete-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2" onclick="toggleComplete('features')">
+                            <span class="status-icon">○</span>
+                            <span class="status-text">Mark as Read</span>
+                        </button>
+                    </div>
+
+                    <div id="features-content" class="accordion-content">
+                        <ul class="space-y-4 text-neutral-300 pb-8">
+                            <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 mt-2 rounded-full bg-blue-500 shrink-0"></div> <div><strong class="text-white">Automatic Everything:</strong> Data type detection, task detection, model selection, preprocessing</div></li>
+                            <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 mt-2 rounded-full bg-blue-500 shrink-0"></div> <div><strong class="text-white">One-Line Training:</strong> Train state-of-the-art models with a single function call</div></li>
+                            <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 mt-2 rounded-full bg-blue-500 shrink-0"></div> <div><strong class="text-white">Hyperparameter Tuning:</strong> Built-in Optuna integration for automatic optimization</div></li>
+                            <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 mt-2 rounded-full bg-blue-500 shrink-0"></div> <div><strong class="text-white">AI Research Assistant:</strong> Built-in WebResearch Engine with Ollama & HuggingFace LLM support</div></li>
+                            <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 mt-2 rounded-full bg-blue-500 shrink-0"></div> <div><strong class="text-white">Easy Deployment:</strong> Export to ONNX/TorchScript + FastAPI scaffold generation</div></li>
+                        </ul>
+                    </div>
                 </section>
 
                 <!-- Installation Section -->
-                <section id="installation" class="mb-20">
-                    <h2 class="text-2xl font-semibold text-white mb-6 border-b border-neutral-800 pb-4">Installation</h2>
-                    
-                    <h3 class="text-lg font-medium text-neutral-200 mb-3">Basic Installation</h3>
-                    <div class="bg-[#111] p-4 rounded-xl border border-neutral-800 mb-6">
-                        <code class="text-green-400 font-mono text-sm">pip install TrainIQ</code>
+                <section id="installation" class="mb-12 relative section-wrapper" data-section-id="installation">
+                    <div class="section-progress"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <button class="accordion-trigger flex items-center gap-4 text-left group" onclick="toggleAccordion('installation-content', this)">
+                            <h2 class="text-2xl font-semibold text-white group-hover:text-blue-400 transition-colors">Installation</h2>
+                            <svg class="w-6 h-6 text-neutral-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <button class="mark-complete-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2" onclick="toggleComplete('installation')">
+                            <span class="status-icon">○</span>
+                            <span class="status-text">Mark as Read</span>
+                        </button>
                     </div>
 
-                    <h3 class="text-lg font-medium text-neutral-200 mb-3">With All Features</h3>
-                    <div class="bg-[#111] p-4 rounded-xl border border-neutral-800">
-                        <code class="text-green-400 font-mono text-sm">pip install TrainIQ[all]</code>
+                    <div id="installation-content" class="accordion-content">
+                        <div class="space-y-6 pb-8">
+                            <div>
+                                <h3 class="text-lg font-medium text-neutral-200 mb-3">Basic Installation</h3>
+                                <div class="bg-[#111] p-4 rounded-xl border border-neutral-800">
+                                    <code class="text-green-400 font-mono text-sm">pip install TrainIQ</code>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium text-neutral-200 mb-3">With All Features</h3>
+                                <div class="bg-[#111] p-4 rounded-xl border border-neutral-800">
+                                    <code class="text-green-400 font-mono text-sm">pip install TrainIQ[all]</code>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
                 <!-- Quick Start Section -->
-                <section id="quickstart" class="mb-20 relative">
-                    <div class="absolute -left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full opacity-50 hidden lg:block"></div>
-                    <h2 class="text-2xl font-semibold text-white mb-6 border-b border-neutral-800 pb-4">Quick Start</h2>
-                    <p class="text-neutral-400 mb-6 leading-relaxed">It only takes a few lines of code to configure, train, and export a complete pipeline.</p>
-                    
-                    <div class="bg-[#111] p-6 rounded-xl border border-neutral-800 shadow-2xl relative overflow-hidden group">
-                        <div class="flex items-center gap-2 mb-4">
-                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            <span class="ml-2 text-xs text-neutral-600 font-mono">train.py</span>
-                        </div>
-                        <pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code><span class="text-purple-400">from</span> trainiq <span class="text-purple-400">import</span> trainiq, trainiqConfig
+                <section id="quickstart" class="mb-12 relative section-wrapper" data-section-id="quick-start">
+                    <div class="section-progress"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <button class="accordion-trigger flex items-center gap-4 text-left group" onclick="toggleAccordion('quickstart-content', this)">
+                            <h2 class="text-2xl font-semibold text-white group-hover:text-blue-400 transition-colors">Quick Start</h2>
+                            <svg class="w-6 h-6 text-neutral-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <button class="mark-complete-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2" onclick="toggleComplete('quick-start')">
+                            <span class="status-icon">○</span>
+                            <span class="status-text">Mark as Read</span>
+                        </button>
+                    </div>
+
+                    <div id="quickstart-content" class="accordion-content">
+                        <p class="text-neutral-400 mb-6 leading-relaxed">It only takes a few lines of code to configure, train, and export a complete pipeline.</p>
+                        <div class="bg-[#111] p-6 rounded-xl border border-neutral-800 shadow-2xl relative overflow-hidden group pb-8">
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                <span class="ml-2 text-xs text-neutral-600 font-mono">train.py</span>
+                            </div>
+                            <pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code><span class="text-purple-400">from</span> trainiq <span class="text-purple-400">import</span> trainiq, trainiqConfig
 
 <span class="text-neutral-500"># 1. Configure</span>
 config = trainiqConfig(
@@ -156,41 +258,103 @@ results = model.train()
 
 <span class="text-neutral-500"># 3. Export</span>
 model.export(format=<span class="text-green-400">"onnx"</span>)</code></pre>
+                        </div>
                     </div>
                 </section>
 
                 <!-- Core Concepts -->
-                <section id="core-concepts" class="mb-20">
-                    <h2 class="text-2xl font-semibold text-white mb-6 border-b border-neutral-800 pb-4">Core Concepts</h2>
-                    
-                    <div class="space-y-8">
-                        <div>
-                            <h3 class="text-xl font-medium text-white mb-2">1. Automatic Data Type Detection</h3>
-                            <p class="text-neutral-400 text-sm leading-relaxed mb-4">TrainIQ automatically identifies your data modality. Supported types include Tabular (CSV, Parquet, JSON), Image (folders), Text, and Time-Series.</p>
-                        </div>
-                        
-                        <div>
-                            <h3 class="text-xl font-medium text-white mb-2">2. Automatic Task Detection</h3>
-                            <p class="text-neutral-400 text-sm leading-relaxed mb-4">You do not need to specify if your task is Classification (binary/multi-class), Regression, or Forecasting; it is derived directly from the loaded data.</p>
-                        </div>
+                <section id="core-concepts" class="mb-12 relative section-wrapper" data-section-id="core-concepts">
+                    <div class="section-progress"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <button class="accordion-trigger flex items-center gap-4 text-left group" onclick="toggleAccordion('core-concepts-content', this)">
+                            <h2 class="text-2xl font-semibold text-white group-hover:text-blue-400 transition-colors">Core Architecture & Concepts</h2>
+                            <svg class="w-6 h-6 text-neutral-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <button class="mark-complete-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2" onclick="toggleComplete('core-concepts')">
+                            <span class="status-icon">○</span>
+                            <span class="status-text">Mark as Read</span>
+                        </button>
+                    </div>
 
-                        <div>
-                            <h3 class="text-xl font-medium text-white mb-2">3. Automatic Model Selection</h3>
-                            <p class="text-neutral-400 text-sm leading-relaxed">Selects the best available architecture under the hood. Compares MLP, Random Forest, XGBoost, ResNet18/50, EfficientNet-B0, TextCNN, DistilBERT, LSTM, and Transformers depending on the modality.</p>
+                    <div id="core-concepts-content" class="accordion-content">
+                        <p class="text-neutral-400 mb-8 leading-relaxed">
+                            TrainIQ is built on a modular engine that automates the decision-making process typically handled by data scientists. Understanding these core modules helps you leverage the full power of the framework.
+                        </p>
+                        
+                        <div class="space-y-12 pb-8">
+                            <!-- Module 1 -->
+                            <div class="relative pl-8 border-l border-blue-500/30">
+                                <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
+                                <h3 class="text-xl font-medium text-white mb-3">1. Universal Data Type Detection (`detector.py`)</h3>
+                                <p class="text-neutral-400 text-sm leading-relaxed mb-4">
+                                    Most AutoML tools require you to define your data type. TrainIQ uses a majority-voting logic and file extension analysis to identify your data modality automatically.
+                                </p>
+                                <div class="bg-neutral-900/50 rounded-lg p-4 text-xs space-y-2 border border-neutral-800 font-mono">
+                                    <p class="text-blue-400">// Detection Logic:</p>
+                                    <p class="text-neutral-300">- Files: CSV/Excel &rarr; <span class="text-green-400">Tabular</span>, JPG/PNG &rarr; <span class="text-green-400">Image</span>, WAV &rarr; <span class="text-green-400">Audio</span></p>
+                                    <p class="text-neutral-300">- Folders: Scans image structure (root/class/img) or votes based on contents.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Module 2 -->
+                            <div class="relative pl-8 border-l border-purple-500/30">
+                                <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]"></div>
+                                <h3 class="text-xl font-medium text-white mb-3">2. Intelligent Task Inference</h3>
+                                <p class="text-neutral-400 text-sm leading-relaxed mb-4">
+                                    Once the data is loaded, TrainIQ analyzes the target column (for tabular) or the dataset structure to infer the machine learning task.
+                                </p>
+                                <div class="bg-neutral-900/50 rounded-lg p-4 text-sm text-neutral-300 border border-neutral-800">
+                                    <ul class="space-y-2">
+                                        <li class="flex gap-2"><span class="text-purple-400">&bull;</span> <strong>Classification:</strong> Infered if target has &le;20 unique values or is an object type.</li>
+                                        <li class="flex gap-2"><span class="text-purple-400">&bull;</span> <strong>Regression:</strong> Infered if target is numeric with high cardinality.</li>
+                                        <li class="flex gap-2"><span class="text-purple-400">&bull;</span> <strong>Forecasting:</strong> Auto-selected for sequence/time-series data.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Module 3 -->
+                            <div class="relative pl-8 border-l border-green-500/30">
+                                <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
+                                <h3 class="text-xl font-medium text-white mb-3">3. Model Zoo & Factory</h3>
+                                <p class="text-neutral-400 text-sm leading-relaxed mb-4">
+                                    TrainIQ maintains a registry of diverse architectures. It doesn't just pick one; it evaluates the best fit for your hardware and data size.
+                                </p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="p-3 bg-white/5 border border-white/10 rounded-lg">
+                                        <span class="text-xs text-neutral-500 font-bold block mb-1">LIGHTWEIGHT</span>
+                                        <p class="text-sm text-neutral-300">XGBoost, Random Forest, ResNet18</p>
+                                    </div>
+                                    <div class="p-3 bg-white/5 border border-white/10 rounded-lg">
+                                        <span class="text-xs text-neutral-500 font-bold block mb-1">HEAVYWEIGHT</span>
+                                        <p class="text-sm text-neutral-300">ResNet50, DistilBERT, Transformers</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
 
                 <!-- Examples Section -->
-                <section id="examples" class="mb-20">
-                    <h2 class="text-2xl font-semibold text-white mb-6 border-b border-neutral-800 pb-4">Examples</h2>
-                    
-                    <div class="space-y-8">
-                        <!-- Tabular Classification -->
-                        <div>
-                            <h3 class="text-lg font-medium text-neutral-200 mb-3">Tabular Classification</h3>
-                            <div class="bg-[#111] p-4 rounded-xl border border-neutral-800">
-                                <pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code><span class="text-purple-400">from</span> trainiq <span class="text-purple-400">import</span> trainiq, trainiqConfig
+                <section id="examples" class="mb-12 relative section-wrapper" data-section-id="examples">
+                    <div class="section-progress"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <button class="accordion-trigger flex items-center gap-4 text-left group" onclick="toggleAccordion('examples-content', this)">
+                            <h2 class="text-2xl font-semibold text-white group-hover:text-blue-400 transition-colors">Examples</h2>
+                            <svg class="w-6 h-6 text-neutral-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <button class="mark-complete-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2" onclick="toggleComplete('examples')">
+                            <span class="status-icon">○</span>
+                            <span class="status-text">Mark as Read</span>
+                        </button>
+                    </div>
+
+                    <div id="examples-content" class="accordion-content">
+                        <div class="space-y-8 pb-8">
+                            <!-- Tabular Classification -->
+                            <div>
+                                <h3 class="text-lg font-medium text-neutral-200 mb-3">Tabular Classification</h3>
+                                <div class="bg-[#111] p-4 rounded-xl border border-neutral-800">
+                                    <pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code><span class="text-purple-400">from</span> trainiq <span class="text-purple-400">import</span> trainiq, trainiqConfig
 
 config = trainiqConfig(
     data_path=<span class="text-green-400">"iris.csv"</span>,
@@ -202,14 +366,14 @@ model = trainiq(config)
 results = model.train()
 
 <span class="text-blue-400">print</span>(<span class="text-green-400">f"Accuracy: {results['best_val_acc']:.4f}"</span>)</code></pre>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Image Classification -->
-                        <div>
-                            <h3 class="text-lg font-medium text-neutral-200 mb-3">Image Classification</h3>
-                            <div class="bg-[#111] p-4 rounded-xl border border-neutral-800">
-                                <pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code><span class="text-neutral-500"># Folder structure:
+                            <!-- Image Classification -->
+                            <div>
+                                <h3 class="text-lg font-medium text-neutral-200 mb-3">Image Classification</h3>
+                                <div class="bg-[#111] p-4 rounded-xl border border-neutral-800">
+                                    <pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code><span class="text-neutral-500"># Folder structure:
 # images/
 #   ├── cat/
 #   ├── dog/
@@ -226,14 +390,14 @@ config = trainiqConfig(
 model = trainiq(config)
 results = model.train()
 model.export(format=<span class="text-green-400">"onnx"</span>)</code></pre>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <!-- Time-Series Forecasting -->
-                        <div>
-                            <h3 class="text-lg font-medium text-neutral-200 mb-3">Time-Series Forecasting</h3>
-                            <div class="bg-[#111] p-4 rounded-xl border border-neutral-800">
-                                <pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code>config = trainiqConfig(
+                            
+                            <!-- Time-Series Forecasting -->
+                            <div>
+                                <h3 class="text-lg font-medium text-neutral-200 mb-3">Time-Series Forecasting</h3>
+                                <div class="bg-[#111] p-4 rounded-xl border border-neutral-800">
+                                    <pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code>config = trainiqConfig(
     data_path=<span class="text-green-400">"stock_prices.csv"</span>,
     data_type=<span class="text-green-400">"timeseries"</span>,
     model_name=<span class="text-green-400">"lstm"</span>,
@@ -245,19 +409,32 @@ model.export(format=<span class="text-green-400">"onnx"</span>)</code></pre>
 
 model = trainiq(config)
 results = model.train()</code></pre>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
                 <!-- Configuration Options -->
-                <section id="configuration" class="mb-20">
-                    <h2 class="text-2xl font-semibold text-white mb-6 border-b border-neutral-800 pb-4">Configuration Options</h2>
-                    <p class="text-neutral-400 leading-relaxed mb-6">
-                        Pass these arguments to <code>trainiqConfig</code> to fine-tune your training setup.
-                    </p>
-                    <div class="bg-[#111] p-6 rounded-xl border border-neutral-800">
-                        <pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code>config = trainiqConfig(
+                <section id="configuration" class="mb-12 relative section-wrapper" data-section-id="configuration">
+                    <div class="section-progress"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <button class="accordion-trigger flex items-center gap-4 text-left group" onclick="toggleAccordion('configuration-content', this)">
+                            <h2 class="text-2xl font-semibold text-white group-hover:text-blue-400 transition-colors">Configuration Options</h2>
+                            <svg class="w-6 h-6 text-neutral-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <button class="mark-complete-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2" onclick="toggleComplete('configuration')">
+                            <span class="status-icon">○</span>
+                            <span class="status-text">Mark as Read</span>
+                        </button>
+                    </div>
+
+                    <div id="configuration-content" class="accordion-content">
+                        <p class="text-neutral-400 leading-relaxed mb-6">
+                            Pass these arguments to <code>trainiqConfig</code> to fine-tune your training setup.
+                        </p>
+                        <div class="bg-[#111] p-6 rounded-xl border border-neutral-800 pb-8">
+                            <pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code>config = trainiqConfig(
     <span class="text-neutral-500"># Data</span>
     data_path=<span class="text-green-400">"data.csv"</span>,           <span class="text-neutral-500"># Path to dataset (required)</span>
     target_column=<span class="text-green-400">"label"</span>,          <span class="text-neutral-500"># Target column name</span>
@@ -283,6 +460,100 @@ results = model.train()</code></pre>
     device=<span class="text-green-400">"cuda"</span>,                  <span class="text-neutral-500"># "cpu", "cuda", "mps"</span>
     seed=<span class="text-orange-400">42</span>                         <span class="text-neutral-500"># Random seed</span>
 )</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- API Reference -->
+                <section id="api-reference" class="mb-12 relative section-wrapper" data-section-id="api-reference">
+                    <div class="section-progress"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <button class="accordion-trigger flex items-center gap-4 text-left group" onclick="toggleAccordion('api-reference-content', this)">
+                            <h2 class="text-2xl font-semibold text-white group-hover:text-blue-400 transition-colors">API Reference</h2>
+                            <svg class="w-6 h-6 text-neutral-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <button class="mark-complete-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2" onclick="toggleComplete('api-reference')">
+                            <span class="status-icon">○</span>
+                            <span class="status-text">Mark as Read</span>
+                        </button>
+                    </div>
+
+                    <div id="api-reference-content" class="accordion-content">
+                        <p class="text-neutral-400 mb-8 leading-relaxed">
+                            Detailed breakdown of the primary functions in the <code>trainiq</code> package.
+                        </p>
+
+                        <div class="space-y-10 pb-8">
+                            <!-- API buttons and details here... -->
+                            <!-- train() -->
+                            <div class="p-6 bg-[#111] rounded-2xl border border-neutral-800">
+                                <h3 class="text-lg font-mono text-blue-400 mb-4">.train()</h3>
+                                <p class="text-neutral-300 text-sm mb-6">Orchestrates the entire training pipeline, from loading data to saving the best model.</p>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div>
+                                        <h4 class="text-xs font-bold text-neutral-500 uppercase mb-2">Inputs</h4>
+                                        <ul class="text-xs text-neutral-400 space-y-1 font-mono">
+                                            <li>None (uses <code class="text-neutral-300">trainiqConfig</code>)</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-neutral-500 uppercase mb-2">Internal Logic</h4>
+                                        <p class="text-xs text-neutral-400 leading-relaxed">Runs detection &rarr; loads data &rarr; builds architecture &rarr; executes training loop with early stopping &rarr; saves best checkpoint.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-neutral-500 uppercase mb-2">Outputs</h4>
+                                        <p class="text-xs text-neutral-400"><code class="text-neutral-300">dict</code>: Contains training history, best accuracy, and path to the best model.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- predict() -->
+                            <div class="p-6 bg-[#111] rounded-2xl border border-neutral-800">
+                                <h3 class="text-lg font-mono text-purple-400 mb-4">.predict(data)</h3>
+                                <p class="text-neutral-300 text-sm mb-6">Runs inference on new, unseen data using the trained model.</p>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div>
+                                        <h4 class="text-xs font-bold text-neutral-500 uppercase mb-2">Inputs</h4>
+                                        <ul class="text-xs text-neutral-400 space-y-1 font-mono">
+                                            <li>data: <code class="text-neutral-300">Array/Path/Image</code></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-neutral-500 uppercase mb-2">Internal Logic</h4>
+                                        <p class="text-xs text-neutral-400 leading-relaxed">Applies the same preprocessing transformations used during training and runs a forward pass through the network.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-neutral-500 uppercase mb-2">Outputs</h4>
+                                        <p class="text-xs text-neutral-400"><code class="text-neutral-300">numpy.ndarray</code>: The predicted labels or values.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- export() -->
+                            <div class="p-6 bg-[#111] rounded-2xl border border-neutral-800">
+                                <h3 class="text-lg font-mono text-green-400 mb-4">.export(format)</h3>
+                                <p class="text-neutral-300 text-sm mb-6">Serializes the model for production environments.</p>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div>
+                                        <h4 class="text-xs font-bold text-neutral-500 uppercase mb-2">Inputs</h4>
+                                        <ul class="text-xs text-neutral-400 space-y-1 font-mono">
+                                            <li>format: <code class="text-neutral-300">"onnx"</code>, <code class="text-neutral-300">"torchscript"</code></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-neutral-500 uppercase mb-2">Internal Logic</h4>
+                                        <p class="text-xs text-neutral-400 leading-relaxed">Traces the model graph with dummy inputs to capture the set of operations and saves it in a hardware-agnostic format.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-neutral-500 uppercase mb-2">Outputs</h4>
+                                        <p class="text-xs text-neutral-400"><code class="text-neutral-300">str</code>: Path to the exported model file.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -305,109 +576,265 @@ results = model.train()</code></pre>
                 </section>
 
                 <!-- Model Zoo Section -->
-                <section id="model-zoo" class="mb-20">
-                    <h2 class="text-2xl font-semibold text-white mb-6 border-b border-neutral-800 pb-4">Model Zoo</h2>
-                    
-                    <div class="space-y-8">
-                        <div>
-                            <h3 class="text-lg font-medium text-neutral-200 mb-3">Tabular Models</h3>
-                            <div class="overflow-x-auto border border-neutral-800 rounded-xl">
-                                <table class="w-full text-sm text-left text-neutral-400">
-                                    <thead class="text-xs text-neutral-300 uppercase bg-[#111] border-b border-neutral-800">
-                                        <tr>
-                                            <th scope="col" class="px-6 py-3 border-r border-neutral-800">Model</th>
-                                            <th scope="col" class="px-6 py-3 border-r border-neutral-800">Type</th>
-                                            <th scope="col" class="px-6 py-3">Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="bg-black border-b border-neutral-800">
-                                            <td class="px-6 py-4 border-r border-neutral-800 font-mono text-white">tabular_net</td>
-                                            <td class="px-6 py-4 border-r border-neutral-800">Neural Network</td>
-                                            <td class="px-6 py-4">Fully-connected MLP</td>
-                                        </tr>
-                                        <tr class="bg-black border-b border-neutral-800">
-                                            <td class="px-6 py-4 border-r border-neutral-800 font-mono text-white">sklearn_rf</td>
-                                            <td class="px-6 py-4 border-r border-neutral-800">Random Forest</td>
-                                            <td class="px-6 py-4">Fast, interpretable</td>
-                                        </tr>
-                                        <tr class="bg-black">
-                                            <td class="px-6 py-4 border-r border-neutral-800 font-mono text-white">sklearn_xgb</td>
-                                            <td class="px-6 py-4 border-r border-neutral-800">XGBoost</td>
-                                            <td class="px-6 py-4">High performance</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                <section id="model-zoo" class="mb-12 relative section-wrapper" data-section-id="model-zoo">
+                    <div class="section-progress"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <button class="accordion-trigger flex items-center gap-4 text-left group" onclick="toggleAccordion('model-zoo-content', this)">
+                            <h2 class="text-2xl font-semibold text-white group-hover:text-blue-400 transition-colors">Model Zoo</h2>
+                            <svg class="w-6 h-6 text-neutral-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <button class="mark-complete-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2" onclick="toggleComplete('model-zoo')">
+                            <span class="status-icon">○</span>
+                            <span class="status-text">Mark as Read</span>
+                        </button>
+                    </div>
 
-                        <div>
-                            <h3 class="text-lg font-medium text-neutral-200 mb-3">Image Models</h3>
-                            <div class="overflow-x-auto border border-neutral-800 rounded-xl">
-                                <table class="w-full text-sm text-left text-neutral-400">
-                                    <thead class="text-xs text-neutral-300 uppercase bg-[#111] border-b border-neutral-800">
-                                        <tr>
-                                            <th scope="col" class="px-6 py-3 border-r border-neutral-800">Model</th>
-                                            <th scope="col" class="px-6 py-3 border-r border-neutral-800">Parameters</th>
-                                            <th scope="col" class="px-6 py-3">Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="bg-black border-b border-neutral-800">
-                                            <td class="px-6 py-4 border-r border-neutral-800 font-mono text-white">resnet50</td>
-                                            <td class="px-6 py-4 border-r border-neutral-800">25M</td>
-                                            <td class="px-6 py-4">Standard deep convolutional network.</td>
-                                        </tr>
-                                        <tr class="bg-black">
-                                            <td class="px-6 py-4 border-r border-neutral-800 font-mono text-white">efficientnet_b0</td>
-                                            <td class="px-6 py-4 border-r border-neutral-800">5M</td>
-                                            <td class="px-6 py-4">Highly efficient mobile-friendly architecture.</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                    <div id="model-zoo-content" class="accordion-content">
+                        <div class="space-y-8 pb-8">
+                            <div>
+                                <h3 class="text-lg font-medium text-neutral-200 mb-3">Tabular Models</h3>
+                                <div class="overflow-x-auto border border-neutral-800 rounded-xl">
+                                    <table class="w-full text-sm text-left text-neutral-400">
+                                        <thead class="text-xs text-neutral-300 uppercase bg-[#111] border-b border-neutral-800">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3 border-r border-neutral-800">Model</th>
+                                                <th scope="col" class="px-6 py-3 border-r border-neutral-800">Type</th>
+                                                <th scope="col" class="px-6 py-3">Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="bg-black border-b border-neutral-800">
+                                                <td class="px-6 py-4 border-r border-neutral-800 font-mono text-white">tabular_net</td>
+                                                <td class="px-6 py-4 border-r border-neutral-800">Neural Network</td>
+                                                <td class="px-6 py-4">Fully-connected MLP</td>
+                                            </tr>
+                                            <tr class="bg-black border-b border-neutral-800">
+                                                <td class="px-6 py-4 border-r border-neutral-800 font-mono text-white">sklearn_rf</td>
+                                                <td class="px-6 py-4 border-r border-neutral-800">Random Forest</td>
+                                                <td class="px-6 py-4">Fast, interpretable</td>
+                                            </tr>
+                                            <tr class="bg-black">
+                                                <td class="px-6 py-4 border-r border-neutral-800 font-mono text-white">sklearn_xgb</td>
+                                                <td class="px-6 py-4 border-r border-neutral-800">XGBoost</td>
+                                                <td class="px-6 py-4">High performance</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium text-neutral-200 mb-3">Image Models</h3>
+                                <div class="overflow-x-auto border border-neutral-800 rounded-xl">
+                                    <table class="w-full text-sm text-left text-neutral-400">
+                                        <thead class="text-xs text-neutral-300 uppercase bg-[#111] border-b border-neutral-800">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3 border-r border-neutral-800">Model</th>
+                                                <th scope="col" class="px-6 py-3 border-r border-neutral-800">Parameters</th>
+                                                <th scope="col" class="px-6 py-3">Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="bg-black border-b border-neutral-800">
+                                                <td class="px-6 py-4 border-r border-neutral-800 font-mono text-white">resnet50</td>
+                                                <td class="px-6 py-4 border-r border-neutral-800">25M</td>
+                                                <td class="px-6 py-4">Standard deep convolutional network.</td>
+                                            </tr>
+                                            <tr class="bg-black">
+                                                <td class="px-6 py-4 border-r border-neutral-800 font-mono text-white">efficientnet_b0</td>
+                                                <td class="px-6 py-4 border-r border-neutral-800">5M</td>
+                                                <td class="px-6 py-4">Highly efficient mobile-friendly architecture.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
                 
+                <!-- Performance & Optimization -->
+                <section id="performance" class="mb-12 relative section-wrapper" data-section-id="performance">
+                    <div class="section-progress"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <button class="accordion-trigger flex items-center gap-4 text-left group" onclick="toggleAccordion('performance-content', this)">
+                            <h2 class="text-2xl font-semibold text-white group-hover:text-blue-400 transition-colors">Performance & Optimization</h2>
+                            <svg class="w-6 h-6 text-neutral-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <button class="mark-complete-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2" onclick="toggleComplete('performance')">
+                            <span class="status-icon">○</span>
+                            <span class="status-text">Mark as Read</span>
+                        </button>
+                    </div>
+
+                    <div id="performance-content" class="accordion-content">
+                        <p class="text-neutral-400 mb-8 leading-relaxed">
+                            Maximize your training speed and model efficiency with these built-in TrainIQ features.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pb-8">
+                            <div class="space-y-4">
+                                <h3 class="text-lg font-medium text-white flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                    Hardware Acceleration
+                                </h3>
+                                <p class="text-neutral-400 text-sm leading-relaxed">
+                                    TrainIQ automatically detects <strong>CUDA</strong> (NVIDIA), <strong>MPS</strong> (Apple Silicon), or <strong>CPU</strong>. To force a specific device, use:
+                                </p>
+                                <code class="block bg-black p-3 rounded border border-neutral-800 text-xs text-green-400 font-mono">config = trainiqConfig(device="cuda")</code>
+                            </div>
+
+                            <div class="space-y-4">
+                                <h3 class="text-lg font-medium text-white flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                    Mixed Precision (AMP)
+                                </h3>
+                                <p class="text-neutral-400 text-sm leading-relaxed">
+                                    Enable Automatic Mixed Precision to speed up training by 2-3x on compatible GPUs without losing significant accuracy.
+                                </p>
+                                <code class="block bg-black p-3 rounded border border-neutral-800 text-xs text-green-400 font-mono">config = trainiqConfig(mixed_precision=True)</code>
+                            </div>
+
+                            <div class="space-y-4">
+                                <h3 class="text-lg font-medium text-white flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                    Early Stopping
+                                </h3>
+                                <p class="text-neutral-400 text-sm leading-relaxed">
+                                    Prevent overfitting by automatically halting training when the validation loss stops improving.
+                                </p>
+                                <code class="block bg-black p-3 rounded border border-neutral-800 text-xs text-green-400 font-mono">config = trainiqConfig(early_stopping_patience=7)</code>
+                            </div>
+
+                            <div class="space-y-4">
+                                <h3 class="text-lg font-medium text-white flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                                    Memory Management
+                                </h3>
+                                <p class="text-neutral-400 text-sm leading-relaxed">
+                                    Use <code>pin_memory</code> and adjust <code>num_workers</code> to optimize data transfers between CPU and GPU.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Deployment Section -->
-                <section id="deployment" class="mb-12">
-                    <h2 class="text-2xl font-semibold text-white mb-6 border-b border-neutral-800 pb-4">Deployment</h2>
-                    <p class="text-neutral-400 leading-relaxed mb-6">
-                        Generating an API scaffold is fully integrated. Just call `.deploy()` on your trained model.
-                    </p>
-                    <div class="bg-[#111] p-6 rounded-xl border border-neutral-800">
-                        <pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code><span class="text-neutral-500"># Generate API scaffold</span>
+                <section id="deployment" class="mb-12 relative section-wrapper" data-section-id="deployment">
+                    <div class="section-progress"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <button class="accordion-trigger flex items-center gap-4 text-left group" onclick="toggleAccordion('deployment-content', this)">
+                            <h2 class="text-2xl font-semibold text-white group-hover:text-blue-400 transition-colors">Deployment</h2>
+                            <svg class="w-6 h-6 text-neutral-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <button class="mark-complete-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2" onclick="toggleComplete('deployment')">
+                            <span class="status-icon">○</span>
+                            <span class="status-text">Mark as Read</span>
+                        </button>
+                    </div>
+
+                    <div id="deployment-content" class="accordion-content">
+                        <p class="text-neutral-400 leading-relaxed mb-6">
+                            Generating an API scaffold is fully integrated. Just call <code>.deploy()</code> on your trained model.
+                        </p>
+                        <div class="bg-[#111] p-6 rounded-xl border border-neutral-800 pb-8">
+                            <pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code><span class="text-neutral-500"># Generate API scaffold</span>
 api_path = model.deploy(output_dir=<span class="text-green-400">"my_api"</span>)
 
 <span class="text-neutral-500"># To run your server:</span>
 <span class="text-neutral-500"># cd my_api</span>
 <span class="text-neutral-500"># pip install -r requirements.txt</span>
 <span class="text-neutral-500"># uvicorn app:app --reload</span></code></pre>
+                        </div>
                     </div>
                 </section>
 
-            </div>
-            
-            <!-- Cookie Footer (Matching the image) -->
-            <!-- <div class="mt-auto border-t border-neutral-800 bg-[#1e1e1e] p-6 lg:px-12">
-                <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-                    <div class="max-w-3xl">
-                        <h4 class="text-white font-medium text-sm mb-2">We use cookies</h4>
-                        <p class="text-xs text-neutral-400 leading-relaxed">
-                            We use cookies to help this site function, understand service usage, and support marketing efforts. Visit <a href="#" class="underline hover:text-white">Manage Cookies</a> to change preferences anytime. View our <a href="#" class="underline hover:text-white">Cookie Policy</a> for more info.
-                        </p>
+                <!-- CLI Usage Section -->
+                <section id="cli" class="mb-12 relative section-wrapper" data-section-id="cli">
+                    <div class="section-progress"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <button class="accordion-trigger flex items-center gap-4 text-left group" onclick="toggleAccordion('cli-content', this)">
+                            <h2 class="text-2xl font-semibold text-white group-hover:text-blue-400 transition-colors">CLI Usage</h2>
+                            <svg class="w-6 h-6 text-neutral-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <button class="mark-complete-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-2" onclick="toggleComplete('cli')">
+                            <span class="status-icon">○</span>
+                            <span class="status-text">Mark as Read</span>
+                        </button>
                     </div>
-                    <div class="flex flex-wrap gap-3 w-full lg:w-auto shrink-0 mt-4 lg:mt-0">
-                        <button class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full text-xs font-medium transition-colors border border-white/5">Manage Cookies</button>
-                        <button class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full text-xs font-medium transition-colors border border-white/5">Reject non-essential</button>
-                        <button class="bg-white hover:bg-neutral-200 text-black px-4 py-2 rounded-full text-xs font-medium transition-colors">Accept all</button>
+
+                    <div id="cli-content" class="accordion-content">
+                        <div class="bg-[#111] p-6 rounded-xl border border-neutral-800 pb-8">
+                            <h3 class="text-lg font-medium text-white mb-4">Command Line Interface</h3>
+                            <pre class="bg-black p-4 rounded text-sm text-green-400 font-mono overflow-x-auto"><code>trainiq train --config config.yaml
+trainiq predict --model model.onnx --data test_data.csv</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Progress Tracker Floating Pill -->
+                <div class="fixed bottom-8 right-8 progress-indicator-pill px-6 py-3 rounded-full flex items-center gap-4 z-50">
+                    <div class="flex flex-col">
+                        <span class="text-[10px] uppercase tracking-widest text-neutral-500 font-bold">Progress</span>
+                        <span class="text-sm font-bold text-white"><span id="completed-count">0</span> / 11 Sections</span>
+                    </div>
+                    <div class="w-12 h-1 bg-neutral-800 rounded-full overflow-hidden">
+                        <div id="progress-bar" class="h-full bg-blue-500 transition-all duration-500" style="width: 0%"></div>
                     </div>
                 </div>
-            </div> -->
+
+            </div>
         </main>
     </div>
 
+    <script>
+        function toggleAccordion(contentId, trigger) {
+            const content = document.getElementById(contentId);
+            content.classList.toggle('open');
+            trigger.classList.toggle('open');
+        }
+
+        function toggleComplete(sectionId) {
+            const completed = JSON.parse(localStorage.getItem('trainiq_docs_progress') || '{}');
+            completed[sectionId] = !completed[sectionId];
+            localStorage.setItem('trainiq_docs_progress', JSON.stringify(completed));
+            updateUI();
+        }
+
+        function updateUI() {
+            const completed = JSON.parse(localStorage.getItem('trainiq_docs_progress') || '{}');
+            const sections = ['features', 'installation', 'quick-start', 'core-concepts', 'examples', 'configuration', 'api-reference', 'performance', 'deployment', 'cli', 'model-zoo'];
+            let count = 0;
+
+            sections.forEach(id => {
+                const isDone = completed[id];
+                const wrapper = document.querySelector(`[data-section-id="${id}"]`);
+                if (!wrapper) return;
+                const btn = wrapper.querySelector('.mark-complete-btn');
+                
+                if (isDone) {
+                    wrapper.classList.add('section-completed');
+                    btn.classList.add('completed');
+                    btn.querySelector('.status-icon').textContent = '●';
+                    btn.querySelector('.status-text').textContent = 'Completed';
+                    count++;
+                } else {
+                    wrapper.classList.remove('section-completed');
+                    btn.classList.remove('completed');
+                    btn.querySelector('.status-icon').textContent = '○';
+                    btn.querySelector('.status-text').textContent = 'Mark as Read';
+                }
+            });
+
+            const completedCountEl = document.getElementById('completed-count');
+            const progressBarEl = document.getElementById('progress-bar');
+            
+            if (completedCountEl) completedCountEl.textContent = count;
+            if (progressBarEl) progressBarEl.style.width = (count / sections.length * 100) + '%';
+        }
+
+        // Initialize UI on load
+        document.addEventListener('DOMContentLoaded', updateUI);
+    </script>
     <script src="js/docs.js"></script>
 </body>
 </html>
