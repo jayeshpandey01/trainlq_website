@@ -89,7 +89,7 @@ body {
 }
 
 a {
-	text-decoration: underline;
+	text-decoration: none;
 	color: var(--color-link);
 	outline: none;
 	cursor: pointer;
