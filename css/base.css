@@ -388,6 +388,14 @@ a:focus-visible {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  opacity: 0.3;
+}
+
+.hero-section {
+	position: relative;
+	height: 100vh;
+	overflow: hidden;
+	width: 100%;
 }
 
 .hero-section::after {
@@ -406,15 +414,21 @@ a:focus-visible {
 	:root {
 		font-size: 10.5px;
 	}
+	.hero-section {
+		height: auto;
+		min-height: 100vh;
+		overflow-y: visible;
+		overflow-x: hidden;
+	}
 	.frame {
 		grid-template-areas:
 			'site site menu'
+			'title title title'
 			'works works works'
-			'content content content'
-			'title title title';
+			'content content content';
 		grid-template-columns: 1fr 1fr auto;
-		grid-template-rows: auto auto 1fr auto;
-		padding: 1.5rem;
+		grid-template-rows: auto auto auto 1fr;
+		padding: 6rem 1.5rem 1.5rem 1.5rem;
 		gap: 1.5rem;
 		min-height: 100dvh;
 	}
@@ -428,20 +442,20 @@ a:focus-visible {
 		flex-direction: row;
 		flex-wrap: wrap;
 		gap: 0.5rem 1rem;
-		padding-top: 2rem;
+		padding-top: 1rem;
+		justify-content: center;
 	}
 	.frame__works span {
 		width: 100%;
 		margin-bottom: 0.25rem;
-		font-size: 0.75rem;
+		font-size: 0.85rem;
 		letter-spacing: 0.2em;
-		opacity: 0.6;
-		font-weight: 600;
+		font-weight: 700;
+		text-align: center;
 	}
 	.frame__works a {
-		font-size: 0.85rem;
+		font-size: 0.95rem;
 		padding: 0.2rem 0;
-		opacity: 0.7;
 		text-decoration: none;
 		border-bottom: 1px solid transparent;
 	}
@@ -454,16 +468,43 @@ a:focus-visible {
 		font-size: clamp(2.2rem, 8vw, 4rem);
 		line-height: 1.1;
 		align-content: end;
-		padding-bottom: 3rem;
+		padding-bottom: 1rem;
 		font-weight: 700;
+		grid-area: title;
 	}
 	.frame__title-main span:last-child {
 		margin-left: 0;
 		display: block;
 	}
+	.content {
+		display: none;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.5rem;
+		padding-bottom: 2rem;
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+	.content:target, .content.content--current {
+		display: flex;
+	}
 	.content__title {
 		font-size: clamp(1.8rem, 7vw, 3.5rem);
-		padding: 0 1rem;
+		padding: 0;
+		display: block;
+		width: 100%;
+		text-align: center;
+		margin-bottom: 1rem;
+	}
+	.pos-1, .pos-2, .pos-3, .pos-4, .pos-5, .pos-6, .pos-7, .pos-8, .pos-9, .pos-10, .pos-11, .pos-12, .pos-13, .pos-14, .pos-15 {
+		grid-area: auto !important;
+		width: 30%;
+		height: 80px;
+		flex-shrink: 0;
+		border-radius: 4px;
+		overflow: hidden;
 	}
 	.frame__menu {
 		width: 28px;

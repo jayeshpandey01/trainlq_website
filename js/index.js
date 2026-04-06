@@ -116,8 +116,12 @@ const hideWork = event => {
   toggleWork(event, false);
 };
 
-// Initialize hover effects and video fade in/out for the navigation
 const initEvents = () => {
+  // Mobile check: disable GSAP hover interactions on small screens
+  if (window.innerWidth <= 848) {
+    return;
+  }
+
   workLinks.forEach(workLink => {
     let hoverTimer; // Declare a variable to hold the timeout
     workLink.addEventListener('mouseenter', event => {
@@ -130,6 +134,11 @@ const initEvents = () => {
       clearTimeout(hoverTimer);
       // Immediately trigger the hideWork function
       hideWork(event);
+    });
+
+    // Prevent default anchor click navigation on desktop so the page doesn't jump
+    workLink.addEventListener('click', event => {
+      event.preventDefault();
     });
   });
 
