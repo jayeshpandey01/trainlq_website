@@ -1,305 +1,344 @@
 <!DOCTYPE html>
-	<html lang="en" class="no-js scroll-smooth">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>TrainIQ | AutoML Framework</title>
-		<link rel="icon" type="image/png" href="media/logo.png">
-		<link rel="shortcut icon" href="media/logo.png" type="image/x-icon">
-		<meta name="description" content="A grid item reveal animation on hover inspired by Metalab" />
-		<meta name="keywords" content="grid hover animation, gsap, hover effect grid, metalab hover" />
-		<meta name="author" content="Codrops" />
-		<link rel="shortcut icon" href="favicon.ico">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
-		<script src="https://cdn.tailwindcss.com"></script>
-		<link rel="stylesheet" type="text/css" href="css/base.css" />
-		<script defer src="js/page-transition.js"></script>
-		<script type="module" src="js/auth.js"></script>
-		<script>document.documentElement.className="js";</script>
-	</head>
-	<body class="loading bg-black text-[#ececec]">
-		<!-- Sticky Navigation Bar -->
-		<nav class="fixed top-0 left-0 w-full z-[2000] bg-black/80 backdrop-blur-md border-b border-neutral-800 transition-all duration-300">
-			<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-				<div class="flex items-center gap-2">
-					<a href="#" class="flex items-center gap-2 text-xl font-bold tracking-tight text-white hover:text-blue-400 transition-colors">
-						<img src="media/logo.png" alt="TrainIQ" class="h-8 w-8" style="filter: invert(1); mix-blend-mode: screen;">
-						TrainIQ
-					</a>
-				</div>
-				<div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-300">
-					<a href="index.html" class="hover:text-white transition-colors">Home</a>
-					<a href="#features" class="hover:text-white transition-colors">Features</a>
-					<a href="research.html" class="hover:text-white transition-colors">WebResearch</a>
-					<a href="models.html" class="hover:text-white transition-colors">Model Training</a>
-					<a href="contact.html" class="hover:text-white transition-colors">Contact</a>
-				</div>
-				<div class="flex items-center gap-4">
-					<div class="flex items-center gap-4" id="auth-container">
-						<a href="https://github.com/jayeshpandey01/TrainIQ" target="_blank" class="text-sm font-medium text-neutral-300 hover:text-white transition-colors hidden md:block">GitHub</a>
-						<a href="login.html" class="bg-white text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-neutral-200 transition-colors">Log in</a>
-					</div>
-					<!-- Mobile Hamburger -->
-					<button id="mobileMenuBtn" class="md:hidden text-white p-1" aria-label="Toggle menu">
-						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-					</button>
-				</div>
-			</div>
-			<!-- Mobile Dropdown -->
-			<div id="mobileMenu" class="md:hidden hidden border-t border-neutral-800 bg-black/85 backdrop-blur-lg">
-				<div class="px-6 py-4 space-y-3 text-sm font-medium text-center">
-					<a href="index.html" class="block text-white py-2">Home</a>
-					<a href="#features" class="block text-neutral-300 hover:text-white py-2">Features</a>
-					<a href="research.html" class="block text-neutral-300 hover:text-white py-2">WebResearch</a>
-					<a href="models.html" class="block text-neutral-300 hover:text-white py-2">Model Training</a>
-					<a href="contact.html" class="block text-neutral-300 hover:text-white py-2">Contact</a>
-					<a href="https://github.com/jayeshpandey01/TrainIQ" target="_blank" class="block text-neutral-300 hover:text-white py-2">GitHub</a>
-				</div>
-			</div>
-		</nav>
-		<script>
-			document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-				document.getElementById('mobileMenu').classList.toggle('hidden');
-			});
-		</script>
+<html lang="en" class="no-js scroll-smooth">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TrainIQ | AutoML Framework</title>
+	<link rel="icon" type="image/png" href="media/logo.png">
+	<link rel="shortcut icon" href="media/logo.png" type="image/x-icon">
+	<meta name="description" content="TrainIQ — Build intelligent ML pipelines beyond limits. One-line AutoML for PyTorch, BERT, XGBoost, and more." />
+	<meta name="keywords" content="automl, machine learning, model training, ai framework, trainiq" />
+	<meta name="author" content="TrainIQ" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/home.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+	<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script> 
+	<script defer src="js/page-transition.js"></script>
+	<script type="module" src="js/auth.js"></script>
+	<script>document.documentElement.className="js";</script>
+</head>
+<body>
 
-		<!-- The TrainIQ Hero Section featuring HoverGrid Animation -->
-		<section class="hero-section">
-			<main>
-				<div class="frame">
-					<nav class="frame__works">
-						<span>Core Features</span>
-						<a href="#content-1">Automatic Everything</a>
-						<a href="#content-2">One-Line Training</a>
-						<a href="#content-3">Multi-Modal Data</a>
-						<a href="#content-4">AI Research Engine</a>
-						<a href="#content-5">Instant Deployment</a>
-					</nav>
-					<h2 class="frame__title-main"><span>Build</span> <span>Intelligent</span><br/><span>ML Pipelines</span></h2>
-					<div class="frame__content">
-						<div class="content" id="content-1" data-bg="bg-1">
-							<h2 class="content__title">Automatic Everything</h2>
-							<div class="content__img pos-1" data-dir="right"><div class="content__img-inner" style="background-image:url(media/1.jpg)"></div></div>
-							<div class="content__img pos-2" data-dir="left"><div class="content__img-inner" style="background-image:url(media/2.jpg)"></div></div>
-							<div class="content__img pos-3" data-dir="top"><div class="content__img-inner" style="background-image:url(media/3.jpg)"></div></div>
-						</div>
-						<div class="content" id="content-2" data-bg="bg-2">
-							<h2 class="content__title">One-Line Training</h2>
-							<div class="content__img pos-4" data-dir="bottom"><div class="content__img-inner" style="background-image:url(media/4.jpg)"></div></div>
-							<div class="content__img pos-5" data-dir="right"><div class="content__img-inner" style="background-image:url(media/5.jpg)"></div></div>
-							<div class="content__img pos-6" data-dir="right"><div class="content__img-inner" style="background-image:url(media/6.jpg)"></div></div>
-						</div>
-						<div class="content" id="content-3" data-bg="bg-3">
-							<h2 class="content__title">Multi-Modal Data</h2>
-							<div class="content__img pos-7" data-dir="right"><div class="content__img-inner" style="background-image:url(media/7.jpg)"></div></div>
-							<div class="content__img pos-8" data-dir="bottom"><div class="content__img-inner" style="background-image:url(media/8.jpg)"></div></div>
-							<div class="content__img pos-9" data-dir="left"><div class="content__img-inner" style="background-image:url(media/9.jpg)"></div></div>
-						</div>
-						<div class="content" id="content-4" data-bg="bg-4">
-							<h2 class="content__title">AI Research Engine</h2>
-							<div class="content__img pos-10" data-dir="left"><div class="content__img-inner" style="background-image:url(media/10.jpg)"></div></div>
-							<div class="content__img pos-11" data-dir="right"><div class="content__img-inner" style="background-image:url(media/11.jpg)"></div></div>
-							<div class="content__img pos-12" data-dir="right"><div class="content__img-inner" style="background-image:url(media/12.jpg)"></div></div>
-						</div>
-						<div class="content" id="content-5" data-bg="bg-5">
-							<h2 class="content__title">Instant Deployment</h2>
-							<div class="content__img pos-13" data-dir="right"><div class="content__img-inner" style="background-image:url(media/13.jpg)"></div></div>
-							<div class="content__img pos-14" data-dir="bottom"><div class="content__img-inner" style="background-image:url(media/14.jpg)"></div></div>
-							<div class="content__img pos-15" data-dir="right"><div class="content__img-inner" style="background-image:url(media/15.jpg)"></div></div>
-						</div>
-					</div>
-				</div>
-			</main>
-			<div class="background">
-				<div id="bg-1" class="background__image" style="background-image:url(media/beige1.jpg)"></div>
-				<div id="bg-2" class="background__image" style="background-image:url(media/red1.jpg)"></div>
-				<div id="bg-3" class="background__image" style="background-image:url(media/pink.jpg)"></div>
-				<div id="bg-4" class="background__image" style="background-image:url(media/beige2.jpg)"></div>
-				<div id="bg-5" class="background__image" style="background-image:url(media/red2.jpg)"></div>
-				<video autoplay muted loop class="background__video">
-					<source src="media/bg-video.mp4" type="video/mp4">
-					Your browser does not support the video tag.
-				</video>
+<!-- ── NAV (Awwwards-style) ──────────────────────────────── -->
+<nav id="main-nav">
+	<div class="nav-inner">
+		<a href="index.html" class="nav-logo">
+			<img src="media/logo.png" alt="TrainIQ">
+			<span>TrainIQ</span>
+		</a>
+		<button id="menuToggle" class="nav-menu-toggle" aria-label="Toggle menu">
+			<span class="nav-menu-toggle__text">Menu</span>
+			<span class="nav-menu-toggle__icon">
+				<span class="nav-menu-toggle__line"></span>
+				<span class="nav-menu-toggle__line"></span>
+			</span>
+		</button>
+	</div>
+</nav>
+
+<!-- ── PUSH-DOWN MENU PANEL ──────────────────────────────── -->
+<div id="menuPanel" class="menu-panel">
+	<div class="menu-panel__inner">
+		<div class="menu-panel__links">
+			<a href="index.html" class="menu-panel__link" data-index="01">Home</a>
+			<a href="#features" class="menu-panel__link" data-index="02">Features</a>
+			<a href="research.html" class="menu-panel__link" data-index="03">Research</a>
+			<a href="models.html" class="menu-panel__link" data-index="04">Models</a>
+			<a href="contact.html" class="menu-panel__link" data-index="05">Contact</a>
+		</div>
+		<div class="menu-panel__footer">
+			<div class="menu-panel__footer-col">
+				<span class="menu-panel__footer-label">Socials</span>
+				<a href="https://github.com/jayeshpandey01/TrainIQ" target="_blank">GitHub</a>
+				<a href="https://pypi.org/project/TrainIQ/" target="_blank">PyPI</a>
 			</div>
-		</section>
-
-		<!-- Trusted By Section -->
-		<section class="py-20 border-b border-neutral-800">
-			<div class="max-w-7xl mx-auto px-6 text-center">
-				<p class="text-sm text-neutral-400 uppercase tracking-widest mb-8">Trusted by developers building the future</p>
-				<div class="flex flex-wrap justify-center gap-12 opacity-50 contrast-0 grayscale transition-all hover:grayscale-0 hover:opacity-100 duration-500">
-					<!-- Dummy logos representing typical ML stack trust -->
-					<h3 class="text-2xl font-bold tracking-tight">PyTorch</h3>
-					<h3 class="text-2xl font-bold tracking-tight">Scikit-Learn</h3>
-					<h3 class="text-2xl font-bold tracking-tight">Optuna</h3>
-					<h3 class="text-2xl font-bold tracking-tight">FastAPI</h3>
-					<h3 class="text-2xl font-bold tracking-tight">HuggingFace</h3>
-				</div>
+			<div class="menu-panel__footer-col">
+				<span class="menu-panel__footer-label">Get started</span>
+				<a href="login.html">Log in</a>
+				<a href="models.html">Start Training</a>
 			</div>
-		</section>
+		</div>
+	</div>
+</div>
 
-		<!-- Features & Code Section -->
-		<section id="features" class="py-32">
-			<div class="max-w-7xl mx-auto px-6">
-				<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-					<div>
-						<h2 class="text-4xl md:text-5xl font-light tracking-tight mb-6">One-Line Training.<br/><span class="text-neutral-500">Zero Configuration.</span></h2>
-						<p class="text-xl text-neutral-400 mb-8 font-light leading-relaxed">
-							TrainIQ automatically detects your data types, tasks, and selects the best model architecture—whether it's tabular, image, text, or time-series data.
-						</p>
-						<ul class="space-y-4 text-neutral-300">
-							<li class="flex items-center gap-3">
-								<svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-								Built-in Optuna Hyperparameter Tuning
-							</li>
-							<li class="flex items-center gap-3">
-								<svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-								Rich Model Zoo (ResNet, BERT, XGBoost)
-							</li>
-							<li class="flex items-center gap-3">
-								<svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-								Export to ONNX & TorchScript instantly
-							</li>
-						</ul>
-					</div>
-					<div class="bg-[#111] p-8 rounded-2xl border border-neutral-800 shadow-2xl relative overflow-hidden group">
-						<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 opacity-50 group-hover:opacity-100 transition-opacity"></div>
-						<div class="flex items-center gap-2 mb-4">
-							<div class="w-3 h-3 rounded-full bg-red-500"></div>
-							<div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-							<div class="w-3 h-3 rounded-full bg-green-500"></div>
-							<span class="ml-2 text-xs text-neutral-600 font-mono">train.py</span>
-						</div>
-						<pre class="text-sm font-mono text-neutral-300 overflow-x-auto"><code><span class="text-purple-400">from</span> trainiq <span class="text-purple-400">import</span> trainiq, trainiqConfig
+<!-- ── HERO ────────────────────────────────────────────── -->
+<section class="hero">
+	<video class="hero__video" autoplay muted loop playsinline>
+		<source src="media/bg-video.mp4" type="video/mp4">
+	</video>
+	<div class="hero__overlay"></div>
+	<div class="hero__glow"></div>
 
-<span class="text-neutral-500"># 1. Configure</span>
+	<div class="hero__inner">
+		<div class="hero__eyebrow">
+			<span class="hero__tag">AutoML Framework</span>
+			<span class="hero__version">v0.1.3</span>
+		</div>
+		<h1 class="hero__title">
+			<span class="hero__line">Build</span>
+			<span class="hero__line hero__line--indent">Intelligent</span>
+			<span class="hero__line">ML Pipelines</span>
+		</h1>
+		<p class="hero__sub">One-line training. Zero configuration.<br>From data to deployed model in minutes.</p>
+		<div class="hero__actions">
+			<a href="models.html" class="hero__btn hero__btn--primary">Start Training</a>
+			<a href="https://github.com/jayeshpandey01/TrainIQ" target="_blank" class="hero__btn hero__btn--ghost">View on GitHub</a>
+		</div>
+	</div>
+
+	<div class="hero__scroll">
+		<span>Scroll</span>
+		<div class="hero__scroll-line"></div>
+	</div>
+</section>
+
+<!-- ── SEC 1 · MADE FOR YOUR PIPELINE (light) ───────────── -->
+<section class="sec-pipeline" id="features">
+	<div class="sec-pipeline__inner">
+		<div class="sec-pipeline__text">
+			<p class="sec-label">Our framework</p>
+			<h2 class="sec-pipeline__headline">Made for your<br>pipeline. We build<br>AutoML.</h2>
+			<p class="sec-pipeline__sub">The modern framework for intelligent model training at any scale — tabular, image, text, or time-series.</p>
+			<a href="models.html" class="pill-link">Explore the model zoo →</a>
+		</div>
+		<div class="capability-grid">
+			<div class="capability-card">
+				<span class="capability-card__number">01</span>
+				<h3 class="capability-card__title">Tabular</h3>
+				<p class="capability-card__desc">XGBoost, LightGBM, RandomForest — auto-tuned with Optuna.</p>
+			</div>
+			<div class="capability-card">
+				<span class="capability-card__number">02</span>
+				<h3 class="capability-card__title">Image</h3>
+				<p class="capability-card__desc">ResNet, EfficientNet, ViT — pretrained or from scratch.</p>
+			</div>
+			<div class="capability-card">
+				<span class="capability-card__number">03</span>
+				<h3 class="capability-card__title">Text</h3>
+				<p class="capability-card__desc">BERT, DistilBERT — fine-tune NLP models in minutes.</p>
+			</div>
+			<div class="capability-card">
+				<span class="capability-card__number">04</span>
+				<h3 class="capability-card__title">TimeSeries</h3>
+				<p class="capability-card__desc">LSTM, Prophet — forecast with built-in feature engineering.</p>
+			</div>
+			<div class="capability-card">
+				<span class="capability-card__number">05</span>
+				<h3 class="capability-card__title">Export</h3>
+				<p class="capability-card__desc">ONNX, TorchScript — one-command deployment-ready models.</p>
+			</div>
+			<div class="capability-card">
+				<span class="capability-card__number">06</span>
+				<h3 class="capability-card__title">Deploy</h3>
+				<p class="capability-card__desc">FastAPI scaffold — instant REST endpoint for inference.</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- ── SEC 2 · DESCRIPTION COPY (light) ────────────────── -->
+<section class="sec-desc">
+	<div class="sec-desc__inner">
+		<div class="sec-desc__label-col">
+			<span class="sec-desc__tag">TrainIQ</span>
+			<span class="sec-desc__v">v0.1.3</span>
+		</div>
+		<p class="sec-desc__copy">
+			Built on clear intent and careful engineering, we design intelligent training pipelines for speed, accuracy, and daily workflow — delivering real-time inference with quick responses so each model feels precise, sharp, and fully within your control.
+		</p>
+	</div>
+</section>
+
+<!-- ── SEC 3 · FULL-BLEED STATEMENT (dark) ───────────────── -->
+<section class="sec-fullbleed">
+	<div class="sec-fullbleed__content">
+		<span class="sec-fullbleed__eyebrow">Next Generation</span>
+		<h2 class="sec-fullbleed__headline">
+			<span class="sec-fullbleed__word">Smarter</span> <span class="sec-fullbleed__word sec-fullbleed__word--accent">training.</span><br>
+			<span class="sec-fullbleed__word">Seamless</span> <span class="sec-fullbleed__word sec-fullbleed__word--accent">deployment.</span>
+		</h2>
+		<p class="sec-fullbleed__sub">From prototype to production — your models, deployed globally with one command.</p>
+		<a href="models.html" class="hero__btn hero__btn--primary">Explore Models</a>
+	</div>
+</section>
+
+<!-- ── SEC 4 · DARK FEATURE + CODE ──────────────────────── -->
+<section class="sec-feature">
+	<div class="sec-feature__glow"></div>
+	<div class="sec-feature__inner">
+		<div class="sec-feature__left">
+			<p class="sec-label sec-label--light">One-line training</p>
+			<h2 class="sec-feature__headline">Train any model<br>with three lines<br>of code.</h2>
+			<ul class="sec-feature__list">
+				<li><span class="check">✓</span> Built-in Optuna Hyperparameter Tuning</li>
+				<li><span class="check">✓</span> Rich Model Zoo — ResNet, BERT, XGBoost</li>
+				<li><span class="check">✓</span> Export to ONNX &amp; TorchScript instantly</li>
+			</ul>
+			<a href="research.html" class="pill-link pill-link--light">Read the docs →</a>
+		</div>
+		<div class="sec-feature__right">
+			<div class="sec-feature__orb"></div>
+			<div class="code-card">
+				<div class="code-card__dots">
+					<span class="dot dot--red"></span>
+					<span class="dot dot--yellow"></span>
+					<span class="dot dot--green"></span>
+					<span class="code-card__filename">train.py</span>
+				</div>
+				<pre><code><span class="kw">from</span> trainiq <span class="kw">import</span> trainiq, trainiqConfig
+
+<span class="cm"># 1. Configure</span>
 config = trainiqConfig(
-    data_path=<span class="text-green-400">"data.csv"</span>,
-    target_column=<span class="text-green-400">"label"</span>,
-    epochs=<span class="text-orange-400">50</span>
+    data_path=<span class="str">"data.csv"</span>,
+    target_column=<span class="str">"label"</span>,
+    epochs=<span class="num">50</span>
 )
 
-<span class="text-neutral-500"># 2. Train</span>
+<span class="cm"># 2. Train</span>
 model = trainiq(config)
 results = model.train()
 
-<span class="text-neutral-500"># 3. Export</span>
-model.export(format=<span class="text-green-400">"onnx"</span>)</code></pre>
-					</div>
+<span class="cm"># 3. Export</span>
+model.export(format=<span class="str">"onnx"</span>)</code></pre>
+				<div class="code-card__result">
+					<span class="code-card__dot-green"></span>
+					Model trained · Accuracy <strong>94.7%</strong> · Export complete
 				</div>
 			</div>
-		</section>
+		</div>
+	</div>
+</section>
 
-		<!-- Interactive Demo / Research Engine Section -->
-		<section id="research" class="py-32 bg-[#0a0a0a] border-y border-neutral-800">
-			<div class="max-w-7xl mx-auto px-6 text-center">
-				<span class="px-3 py-1 text-xs font-semibold bg-blue-500/10 text-blue-400 rounded-full mb-6 inline-block">NEW IN v0.1.3</span>
-				<h2 class="text-4xl md:text-5xl font-light tracking-tight mb-6">AI Research Engine</h2>
-				<p class="text-xl text-neutral-400 max-w-2xl mx-auto mb-16 font-light">
-					Built-in web scraper and RAG engine that uses Ollama or HuggingFace to answer complex ML architecture questions.
-				</p>
-				
-				<div class="max-w-3xl mx-auto bg-black border border-neutral-800 rounded-2xl p-2 md:p-4 text-left shadow-2xl">
-					<div class="p-4 border-b border-neutral-800 flex items-center gap-4">
-						<div class="flex-1 bg-[#111] rounded-lg p-3 flex items-center gap-3 border border-neutral-800">
-							<svg class="w-5 h-5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-							<span class="text-neutral-300 text-sm font-mono">trainiq research "What is transfer learning?" --llm-provider huggingface</span>
-						</div>
-						<button class="bg-white text-black px-6 py-3 rounded-lg font-medium hover:bg-neutral-200 transition-colors hidden md:block">Execute</button>
-					</div>
-					<div class="p-6">
-						<div class="flex items-start gap-4 mb-6">
-							<div class="w-8 h-8 rounded bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0 text-white font-bold text-xs">AI</div>
-							<div>
-								<p class="text-neutral-300 text-sm leading-relaxed mb-4">Transfer learning in deep learning consists of taking features learned on one problem, and leveraging them on a new, similar problem. For instance, features from a model that has learned to identify raccoons may be useful to kick-start a model meant to identify ninjas.</p>
-								<div class="flex gap-2">
-									<a href="#" class="text-xs bg-neutral-900 border border-neutral-800 text-neutral-400 px-2 py-1 rounded hover:bg-neutral-800 transition-colors">Source: PyTorch Docs</a>
-									<a href="#" class="text-xs bg-neutral-900 border border-neutral-800 text-neutral-400 px-2 py-1 rounded hover:bg-neutral-800 transition-colors">Source: arXiv</a>
-								</div>
-							</div>
-						</div>
-					</div>
+<!-- ── SEC 5 · SPLIT FEATURES (text-only) ────────────── -->
+<section class="sec-split">
+	<div class="sec-split__card">
+		<span class="sec-split__number">01</span>
+		<h3 class="sec-split__title">Multi-Modal</h3>
+		<p class="sec-split__desc">Tabular · Image · Text · TimeSeries — one unified API for every data type.</p>
+		<a href="models.html" class="pill-link">Explore models →</a>
+	</div>
+	<div class="sec-split__divider"></div>
+	<div class="sec-split__card">
+		<span class="sec-split__number">02</span>
+		<h3 class="sec-split__title">Instant Deploy</h3>
+		<p class="sec-split__desc">ONNX · TorchScript · FastAPI scaffold — production in one command.</p>
+		<a href="research.html" class="pill-link">Read the docs →</a>
+	</div>
+</section>
+
+<!-- ── SEC 6 · METRICS (light) ──────────────────────────── -->
+<section class="sec-metrics">
+	<div class="sec-metrics__inner">
+		<div class="sec-metrics__header">
+			<p class="sec-label">Performance</p>
+			<h2 class="sec-metrics__headline">Intelligent systems shaping<br>the future of adaptive ML</h2>
+		</div>
+		<div class="sec-metrics__grid">
+			<div class="metric-item">
+				<div class="metric-item__top">
+					<span class="metric-item__label">Real-Time Training Engine</span>
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13l-5 5-5-5M18 6l-5 5-5-5"/></svg>
+				</div>
+				<div class="metric-bar-wrap"><div class="metric-bar" style="--w:78%"></div></div>
+			</div>
+			<div class="metric-item metric-item--hero">
+				<span class="metric-item__sublabel">General Model Accuracy</span>
+				<span class="metric-big">94.7<em>%</em></span>
+				<div class="metric-heatmap">
+					<div class="hm-row"><span class="hm-label">Tabular</span><div class="hm-bars"><div class="hm-bar" style="width:94%"></div></div><span class="hm-val">94%</span></div>
+					<div class="hm-row"><span class="hm-label">Image</span><div class="hm-bars"><div class="hm-bar" style="width:91%"></div></div><span class="hm-val">91%</span></div>
+					<div class="hm-row"><span class="hm-label">Text</span><div class="hm-bars"><div class="hm-bar" style="width:88%"></div></div><span class="hm-val">88%</span></div>
+					<div class="hm-row"><span class="hm-label">TimeSeries</span><div class="hm-bars"><div class="hm-bar" style="width:96%"></div></div><span class="hm-val">96%</span></div>
 				</div>
 			</div>
-		</section>
-
-		<!-- Blog / Tutorials -->
-		<section id="blog" class="py-32">
-			<div class="max-w-7xl mx-auto px-6">
-				<div class="flex justify-between items-end mb-12">
-					<div>
-						<h2 class="text-3xl font-light tracking-tight mb-2">Learn & Build</h2>
-						<p class="text-neutral-400">Step-by-step guides for using TrainIQ.</p>
-					</div>
-					<a href="models.html" class="text-blue-400 hover:text-blue-300 hidden md:block">View all docs &rarr;</a>
+			<div class="metric-item">
+				<div class="metric-item__top">
+					<span class="metric-item__label">Adaptive Hyperparameter Tuning</span>
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 8h10M7 12h10M7 16h10"/></svg>
 				</div>
-				
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-					<!-- Post 1 -->
-					<a href="models.html"><div class="group cursor-pointer">
-						<div class="aspect-video bg-neutral-900 rounded-xl mb-6 overflow-hidden relative">
-							<div class="absolute inset-0 bg-[url('media/1.jpg')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-500 group-hover:scale-105"></div>
-						</div>
-						<div class="flex gap-2 mb-3">
-							<span class="text-xs font-medium text-blue-400 bg-blue-400/10 px-2 py-1 rounded">AutoML</span>
-							<span class="text-xs text-neutral-500 py-1">5 min read</span>
-						</div>
-						<h3 class="text-xl font-medium mb-2 group-hover:text-blue-400 transition-colors">Getting Started with TrainIQ in 10 Minutes</h3>
-						<p class="text-neutral-400 text-sm">Learn how to build, train, and export your first machine learning model using a single line of Python.</p>
-					</div></a>
+				<div class="metric-bar-wrap"><div class="metric-bar" style="--w:91%"></div></div>
+			</div>
+		</div>
+	</div>
+</section>
 
-					<!-- Post 2 -->
-					<a href="research.html"><div class="group cursor-pointer">
-						<div class="aspect-video bg-neutral-900 rounded-xl mb-6 overflow-hidden relative">
-							<div class="absolute inset-0 bg-[url('media/6.jpg')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-500 group-hover:scale-105"></div>
-						</div>
-						<div class="flex gap-2 mb-3">
-							<span class="text-xs font-medium text-purple-400 bg-purple-400/10 px-2 py-1 rounded">AI Tools</span>
-							<span class="text-xs text-neutral-500 py-1">8 min read</span>
-						</div>
-						<h3 class="text-xl font-medium mb-2 group-hover:text-blue-400 transition-colors">Using the WebResearch Engine for Data Discovery</h3>
-						<p class="text-neutral-400 text-sm">Harness the power of local Ollama models and HuggingFace to automate your ML literature review.</p>
-					</div></a>
+<!-- ── SEC 7 · BRAND WORDMARK (dark minimal) ──────────── -->
+<section class="sec-brand">
+	<div class="sec-brand__inner">
+		<div class="sec-brand__rule"></div>
+		<h2 class="sec-brand__wordmark">TrainIQ</h2>
+		<p class="sec-brand__tagline">The intelligent machine learning framework.</p>
+		<div class="sec-brand__stats">
+			<div class="sec-brand__stat">
+				<span class="sec-brand__stat-number">15+</span>
+				<span class="sec-brand__stat-label">Models</span>
+			</div>
+			<div class="sec-brand__stat">
+				<span class="sec-brand__stat-number">94.7%</span>
+				<span class="sec-brand__stat-label">Accuracy</span>
+			</div>
+			<div class="sec-brand__stat">
+				<span class="sec-brand__stat-number">3</span>
+				<span class="sec-brand__stat-label">Lines of Code</span>
+			</div>
+		</div>
+	</div>
+</section>
 
-					<!-- Post 3 -->
-					<a href="models.html#model-zoo"><div class="group cursor-pointer md:hidden lg:block">
-						<div class="aspect-video bg-neutral-900 rounded-xl mb-6 overflow-hidden relative">
-							<div class="absolute inset-0 bg-[url('media/12.jpg')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-500 group-hover:scale-105"></div>
-						</div>
-						<div class="flex gap-2 mb-3">
-							<span class="text-xs font-medium text-green-400 bg-green-400/10 px-2 py-1 rounded">Deployment</span>
-							<span class="text-xs text-neutral-500 py-1">6 min read</span>
-						</div>
-						<h3 class="text-xl font-medium mb-2 group-hover:text-blue-400 transition-colors">Deploying ML Models with FastAPI Integration</h3>
-						<p class="text-neutral-400 text-sm">Export your trained models to ONNX and automatically generate a FastAPI scaffold for instant deployment.</p>
-					</div></a>
+<!-- ── SEC 8 · CTA (light) ──────────────────────────────── -->
+<section class="sec-cta">
+	<div class="sec-cta__inner">
+		<p class="sec-label">Get started today</p>
+		<h2 class="sec-cta__headline">Ready to train your<br>first model?</h2>
+		<a href="models.html" class="hero__btn hero__btn--dark">Get Started →</a>
+	</div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────────────── -->
+<footer class="site-footer">
+	<div class="site-footer__inner">
+		<div class="site-footer__top">
+			<div class="site-footer__brand">
+				<img src="media/logo.png" alt="TrainIQ">
+				<span>TrainIQ <sup>v0.1.3</sup></span>
+			</div>
+			<div class="site-footer__cols">
+				<div class="site-footer__col">
+					<span class="footer-col-label">Product</span>
+					<a href="#features">Features</a>
+					<a href="models.html">Model Training</a>
+					<a href="research.html">Research Engine</a>
+				</div>
+				<div class="site-footer__col">
+					<span class="footer-col-label">Resources</span>
+					<a href="blog.html">Blog &amp; Docs</a>
+					<a href="https://github.com/jayeshpandey01/TrainIQ" target="_blank">GitHub</a>
+					<a href="https://pypi.org/project/TrainIQ/" target="_blank">PyPI</a>
+				</div>
+				<div class="site-footer__col">
+					<span class="footer-col-label">Company</span>
+					<a href="contact.html">Contact</a>
+					<a href="#">Privacy</a>
+					<a href="#">MIT License</a>
 				</div>
 			</div>
-		</section>
-
-		<!-- Footer -->
-		<footer class="border-t border-neutral-800 py-12 bg-[#050505]">
-			<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-				<div class="flex items-center gap-2">
-					<img src="media/logo.png" alt="TrainIQ" class="h-6 w-6" style="filter: invert(1); mix-blend-mode: screen;">
-					<span class="text-xl font-bold tracking-tight">TrainIQ <sup class="text-xs text-neutral-500 font-normal">v0.1.3</sup></span>
-				</div>
-				<div class="flex gap-8 text-sm text-neutral-400">
-					<a href="blog.html" class="hover:text-white transition-colors">Blog & Docs</a>
-					<a href="https://github.com/jayeshpandey01/TrainIQ" class="hover:text-white transition-colors">GitHub</a>
-					<a href="https://pypi.org/project/TrainIQ/" class="hover:text-white transition-colors">PyPI</a>
-					<a href="contact.html" class="hover:text-white transition-colors">Contact</a>
-				</div>
-				<div class="text-sm text-neutral-500">
-					Mickey &copy; 2026. MIT License.
-				</div>
+		</div>
+		<div class="site-footer__bottom">
+			<span>© 2026 TrainIQ. MIT License.</span>
+			<div class="site-footer__social">
+				<a href="https://github.com/jayeshpandey01/TrainIQ" target="_blank">GitHub</a>
+				<a href="https://pypi.org/project/TrainIQ/" target="_blank">PyPI</a>
 			</div>
-		</footer>
-		<script src="js/gsap.min.js"></script>
-		<!-- Image preloader -->
-		<script src="js/imagesloaded.pkgd.min.js"></script>
-		<script type="module" src="js/index.js"></script>
-	</body>
+		</div>
+	</div>
+</footer>
+
+<script src="js/imagesloaded.pkgd.min.js"></script>
+<script src="js/home-anim.js"></script>
+
+</body>
 </html>
