@@ -14,10 +14,13 @@
 
     if (menuBtn && sidebar) {
         // Create overlay
-        const overlay = document.createElement('div');
-        overlay.className = 'fixed inset-0 bg-black/60 backdrop-blur-sm z-30 hidden lg:hidden';
-        overlay.id = 'sidebarOverlay';
-        document.body.appendChild(overlay);
+        let overlay = document.getElementById('sidebarOverlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'fixed inset-0 bg-black/60 backdrop-blur-sm z-30 hidden lg:hidden';
+            overlay.id = 'sidebarOverlay';
+            document.body.appendChild(overlay);
+        }
 
         function openSidebar() {
             sidebar.classList.remove('hidden');
@@ -48,25 +51,28 @@
      * ────────────────────────────────────────────── */
 
     // Build search modal DOM
-    const modal = document.createElement('div');
-    modal.id = 'searchModal';
-    modal.className = 'fixed inset-0 z-[3000] hidden';
-    modal.innerHTML = `
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" id="searchOverlay"></div>
-        <div class="relative max-w-2xl mx-auto mt-24 px-4">
-            <div class="bg-neutral-900 border border-neutral-700 rounded-2xl shadow-2xl overflow-hidden">
-                <div class="flex items-center gap-3 px-5 py-4 border-b border-neutral-800">
-                    <svg class="w-5 h-5 text-neutral-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    <input id="searchInput" type="text" placeholder="Search documentation..." class="flex-1 bg-transparent text-white text-base outline-none placeholder-neutral-500" autocomplete="off" />
-                    <kbd class="hidden sm:inline-block px-2 py-0.5 text-[10px] font-mono text-neutral-500 border border-neutral-700 rounded bg-neutral-800">ESC</kbd>
-                </div>
-                <div id="searchResults" class="max-h-[60vh] overflow-y-auto p-2">
-                    <div class="text-center py-10 text-neutral-500 text-sm">Type to search sections, headings, and code...</div>
+    let modal = document.getElementById('searchModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'searchModal';
+        modal.className = 'fixed inset-0 z-[3000] hidden';
+        modal.innerHTML = `
+            <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" id="searchOverlay"></div>
+            <div class="relative max-w-2xl mx-auto mt-24 px-4">
+                <div class="bg-neutral-900 border border-neutral-700 rounded-2xl shadow-2xl overflow-hidden">
+                    <div class="flex items-center gap-3 px-5 py-4 border-b border-neutral-800">
+                        <svg class="w-5 h-5 text-neutral-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input id="searchInput" type="text" placeholder="Search documentation..." class="flex-1 bg-transparent text-white text-base outline-none placeholder-neutral-500" autocomplete="off" />
+                        <kbd class="hidden sm:inline-block px-2 py-0.5 text-[10px] font-mono text-neutral-500 border border-neutral-700 rounded bg-neutral-800">ESC</kbd>
+                    </div>
+                    <div id="searchResults" class="max-h-[60vh] overflow-y-auto p-2">
+                        <div class="text-center py-10 text-neutral-500 text-sm">Type to search sections, headings, and code...</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    `;
-    document.body.appendChild(modal);
+        `;
+        document.body.appendChild(modal);
+    }
 
     const searchOverlay = document.getElementById('searchOverlay');
     const searchInput = document.getElementById('searchInput');
@@ -188,6 +194,61 @@
             }
         }
     });
+
+    /* ──────────────────────────────────────────────
+     * 3. SCROLLSPY (Highlight active sidebar link)
+     * ────────────────────────────────────────────── */
+    const observerOptions = {
+        root: null,
+        rootMargin: '-10% 0px -80% 0px',
+        threshold: 0
+    };
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                updateActiveSidebarLink(id);
+            }
+        });
+    }, observerOptions);
+
+    function updateActiveSidebarLink(id) {
+        const sidebarLinks = document.querySelectorAll('aside nav a[href^="#"]');
+        sidebarLinks.forEach(link => {
+            const href = link.getAttribute('href').substring(1);
+            if (href === id) {
+                link.classList.add('text-white', 'bg-neutral-800/30');
+                link.classList.remove('text-neutral-400');
+            } else {
+                link.classList.remove('text-white', 'bg-neutral-800/30');
+                link.classList.add('text-neutral-400');
+            }
+        });
+    }
+
+    // Observe all sections
+    document.querySelectorAll('main section[id]').forEach(section => {
+        scrollObserver.observe(section);
+    });
+
+    /* ──────────────────────────────────────────────
+     * 4. ACCORDION ENHANCEMENTS
+     * ────────────────────────────────────────────── */
+    // Expose toggleAccordion globally if not already
+    window.toggleAccordion = function(contentId, trigger) {
+        const content = document.getElementById(contentId);
+        if (!content) return;
+        
+        const isOpen = content.classList.contains('open');
+        
+        // Toggle the target
+        content.classList.toggle('open');
+        trigger.classList.toggle('open');
+        
+        // Optional: Close others in the same container? 
+        // No, let's keep it simple as requested ("close and open").
+    };
 
     // Wire up all search buttons (the magnifying glass icon in header)
     document.querySelectorAll('[data-search-trigger]').forEach(btn => {

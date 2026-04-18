@@ -78,6 +78,17 @@ async function handleLogout() {
 }
 
 // Auto-run sync on load
-document.addEventListener('DOMContentLoaded', syncAuthUI);
+if (!window.__authInitialized) {
+    window.__authInitialized = true;
+    document.addEventListener('DOMContentLoaded', syncAuthUI);
+}
+
+// Also run immediately if DOM is already loaded (for React injection)
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    if (!window.__authSynced) {
+        window.__authSynced = true;
+        syncAuthUI();
+    }
+}
 
 export { auth, db };

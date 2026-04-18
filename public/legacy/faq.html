@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQs | TrainIQ AutoML</title>
+    <meta name="description" content="Find answers to frequently asked questions about TrainIQ's AutoML framework, model training, and deployment." />
+    <meta name="keywords" content="TrainIQ FAQ, AutoML Questions, Machine Learning Support, AI Training Help" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #000; color: #fff; font-family: 'Outfit', sans-serif; }
+        .glass-nav { background: rgba(0,0,0,0.5); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
+        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .faq-content { max-height: 0; overflow: hidden; transition: all 0.3s ease; opacity: 0; }
+        .faq-content.open { max-height: 500px; opacity: 1; padding-bottom: 2rem; }
+        .faq-trigger svg { transition: transform 0.3s ease; }
+        .faq-trigger.open svg { transform: rotate(180deg); }
+    </style>
+</head>
+<body class="bg-black">
+    <!-- Header -->
+    <header class="fixed top-6 left-0 w-full z-50 px-6">
+        <nav class="max-w-4xl mx-auto glass-nav px-6 py-3 flex items-center justify-between rounded-full">
+            <div class="flex items-center gap-2">
+                <img src="media/logo.png" alt="TrainIQ" class="h-8 w-8 object-contain invert brightness-200">
+                <span class="font-bold text-xl tracking-tighter">TRAINIQ</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-400">
+                <a href="index.html" class="hover:text-white transition-colors">Product</a>
+                <a href="models.html" class="hover:text-white transition-colors">Technology</a>
+                <a href="research.html" class="hover:text-white transition-colors">Research</a>
+                <a href="blog.html" class="hover:text-white transition-colors">Experience</a>
+            </div>
+            <a href="signup.html" class="bg-white text-black px-5 py-2 rounded-full text-xs font-bold hover:bg-neutral-200 transition-all">Pre-Order Now</a>
+        </nav>
+    </header>
+
+    <main class="pt-40 pb-32 px-6">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter mb-12">Frequently Asked Questions.</h1>
+            
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <button class="faq-trigger w-full py-6 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
+                        <span class="text-xl font-medium group-hover:text-neutral-300 transition-colors">What is TrainIQ?</span>
+                        <svg class="w-6 h-6 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="faq-content text-neutral-400 leading-relaxed">
+                        TrainIQ is a modern AutoML framework designed to automate the entire machine learning pipeline—from data detection and preprocessing to model selection and deployment—with just a single function call.
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <button class="faq-trigger w-full py-6 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
+                        <span class="text-xl font-medium group-hover:text-neutral-300 transition-colors">Which data types are supported?</span>
+                        <svg class="w-6 h-6 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="faq-content text-neutral-400 leading-relaxed">
+                        We currently support Tabular data (CSV/Parquet), Image data (Classification/Detection), Text (NLP tasks), and Time-Series forecasting.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <button class="faq-trigger w-full py-6 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
+                        <span class="text-xl font-medium group-hover:text-neutral-300 transition-colors">Can I export my models?</span>
+                        <svg class="w-6 h-6 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="faq-content text-neutral-400 leading-relaxed">
+                        Yes! TrainIQ supports one-click export to ONNX and TorchScript formats, along with automatic FastAPI scaffold generation for production deployment.
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <button class="faq-trigger w-full py-6 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
+                        <span class="text-xl font-medium group-hover:text-neutral-300 transition-colors">Is there a free version?</span>
+                        <svg class="w-6 h-6 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="faq-content text-neutral-400 leading-relaxed">
+                        The core TrainIQ engine is open-source. We offer a managed Cloud platform for large-scale training and research automation.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleFaq(btn) {
+            const content = btn.nextElementSibling;
+            btn.classList.toggle('open');
+            content.classList.toggle('open');
+        }
+    </script>
+    <!-- Footer -->
+    <footer class="bg-black py-20 border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-6xl mx-auto text-center md:text-left">
+                <div class="md:col-span-2">
+                    <div class="flex items-center justify-center md:justify-start gap-2 mb-6">
+                        <img src="media/logo.png" alt="TrainIQ" class="h-6 w-6 object-contain invert brightness-200">
+                        <span class="font-bold text-lg tracking-tighter">TRAINIQ</span>
+                    </div>
+                    <p class="text-neutral-500 text-sm max-w-xs">End-to-end ML/DL pipelines with a single call. Support for tabular, image, text, and time-series data.</p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-white mb-6">Resources</h4>
+                    <ul class="text-neutral-500 text-sm space-y-3">
+                        <li><a href="faq.html" class="hover:text-white transition-colors">FAQs</a></li>
+                        <li><a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-white transition-colors">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-white mb-6">Company</h4>
+                    <ul class="text-neutral-500 text-sm space-y-3">
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="index.html" class="hover:text-white transition-colors">About</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-20 pt-10 border-t border-white/5 text-center text-[10px] font-bold text-neutral-600 uppercase tracking-widest">
+                © 2026 TRAINIQ. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</html>

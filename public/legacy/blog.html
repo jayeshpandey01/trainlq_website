@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TrainIQ Experience | Tutorials & Case Studies</title>
+    <meta name="description" content="Explore the TrainIQ Experience. Read tutorials, case studies, and insights on the future of AutoML and Machine Learning." />
+    <meta name="keywords" content="TrainIQ Blog, AutoML Tutorials, Machine Learning Case Studies, AI Insights" />
+    <meta name="description" content="Explore articles, tutorials, and real-world case studies of TrainIQ AutoML in action." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="js/auth.js"></script>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .blog-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-black flex flex-col min-h-screen">
+
+    <!-- Top Global Header -->
+    <header class="fixed top-6 left-0 w-full z-[3000] px-6">
+        <nav class="max-w-4xl mx-auto glass-nav px-6 py-3 flex items-center justify-between rounded-full">
+            <div class="flex items-center gap-2">
+                <img src="media/logo.png" alt="TrainIQ" class="h-8 w-8 object-contain invert brightness-200">
+                <span class="font-bold text-xl tracking-tighter text-white">TRAINIQ</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-400">
+                <a href="index.html" class="hover:text-white transition-colors">Product</a>
+                <a href="models.html" class="hover:text-white transition-colors">Technology</a>
+                <a href="research.html" class="hover:text-white transition-colors">Research</a>
+                <a href="blog.html" class="text-white border-b border-white">Experience</a>
+            </div>
+            <a href="signup.html" class="bg-white text-black px-5 py-2 rounded-full text-xs font-bold hover:bg-neutral-200 transition-all">Pre-Order Now</a>
+        </nav>
+    </header>
+
+    <main class="flex-1 mt-32 px-6 pb-32">
+        <div class="max-w-6xl mx-auto">
+            <!-- Hero -->
+            <div class="mb-20">
+                <h1 class="text-5xl md:text-8xl font-bold tracking-tighter mb-6">The Experience.</h1>
+                <p class="text-xl text-neutral-400 max-w-2xl font-light">
+                    Real-world applications, deep dives, and community tutorials. See how TrainIQ is reshaping the ML landscape.
+                </p>
+            </div>
+
+            <!-- Featured Article -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-12">
+                <a href="models.html#quickstart" class="md:col-span-8 blog-card rounded-[32px] overflow-hidden group">
+                    <div class="h-[400px] bg-neutral-900 relative">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                        <div class="absolute bottom-10 left-10 right-10">
+                            <span class="text-xs font-bold uppercase tracking-widest text-blue-400 mb-4 block">Tutorial</span>
+                            <h2 class="text-4xl font-bold tracking-tight mb-4 group-hover:text-blue-400 transition-colors">Training your first AutoML model in 60 seconds.</h2>
+                            <p class="text-neutral-400 text-sm max-w-md">Learn how to go from raw CSV data to a deployed API endpoint using the single-call TrainIQ engine.</p>
+                        </div>
+                    </div>
+                </a>
+                <div class="md:col-span-4 flex flex-col gap-6">
+                    <div class="flex-1 blog-card rounded-[32px] p-8 flex flex-col justify-between">
+                        <span class="text-xs font-bold uppercase tracking-widest text-purple-400">Case Study</span>
+                        <h3 class="text-xl font-bold mt-4">Scaling Vision Systems at Edge Labs</h3>
+                        <p class="text-xs text-neutral-500 mt-4">Read how Edge Labs reduced deployment time by 80%.</p>
+                    </div>
+                    <div class="flex-1 blog-card rounded-[32px] p-8 flex flex-col justify-between">
+                        <span class="text-xs font-bold uppercase tracking-widest text-green-400">Update</span>
+                        <h3 class="text-xl font-bold mt-4">TrainIQ v1.2: Optuna & ONNX support</h3>
+                        <p class="text-xs text-neutral-500 mt-4">Everything new in the latest release.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Post 1 -->
+                <div class="blog-card rounded-3xl p-6 flex flex-col gap-4">
+                    <div class="aspect-video bg-neutral-900 rounded-xl overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-blue-600/20 to-transparent"></div>
+                    </div>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500">ML Concepts</span>
+                    <h4 class="text-lg font-bold">Automatic Data Discovery explained.</h4>
+                    <p class="text-xs text-neutral-500 leading-relaxed">A deep dive into how TrainIQ identifies data types and selects preprocessing strategies.</p>
+                    <a href="models.html#documentation" class="text-xs font-bold mt-2 hover:text-blue-400 transition-colors">Read Article &rarr;</a>
+                </div>
+                <!-- Post 2 -->
+                <div class="blog-card rounded-3xl p-6 flex flex-col gap-4">
+                    <div class="aspect-video bg-neutral-900 rounded-xl overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-purple-600/20 to-transparent"></div>
+                    </div>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500">Research</span>
+                    <h4 class="text-lg font-bold">Leveraging WebResearch for better insights.</h4>
+                    <p class="text-xs text-neutral-500 leading-relaxed">How to use the research engine to synthesize information from the web automatically.</p>
+                    <a href="research.html" class="text-xs font-bold mt-2 hover:text-blue-400 transition-colors">Read Article &rarr;</a>
+                </div>
+                <!-- Post 3 -->
+                <div class="blog-card rounded-3xl p-6 flex flex-col gap-4">
+                    <div class="aspect-video bg-neutral-900 rounded-xl overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-green-600/20 to-transparent"></div>
+                    </div>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500">Deployment</span>
+                    <h4 class="text-lg font-bold">FastAPI & ONNX: The perfect combo.</h4>
+                    <p class="text-xs text-neutral-500 leading-relaxed">Performance benchmarks of TrainIQ exports vs traditional manual deployments.</p>
+                    <a href="models.html#deployment" class="text-xs font-bold mt-2 hover:text-blue-400 transition-colors">Read Article &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-20 border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-6xl mx-auto text-center md:text-left">
+                <div class="md:col-span-2">
+                    <div class="flex items-center justify-center md:justify-start gap-2 mb-6">
+                        <img src="media/logo.png" alt="TrainIQ" class="h-6 w-6 object-contain invert brightness-200">
+                        <span class="font-bold text-lg tracking-tighter">TRAINIQ</span>
+                    </div>
+                    <p class="text-neutral-500 text-sm max-w-xs">End-to-end ML/DL pipelines with a single call. Support for tabular, image, text, and time-series data.</p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-white mb-6">Resources</h4>
+                    <ul class="text-neutral-500 text-sm space-y-3">
+                        <li><a href="faq.html" class="hover:text-white transition-colors">FAQs</a></li>
+                        <li><a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-white transition-colors">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-white mb-6">Company</h4>
+                    <ul class="text-neutral-500 text-sm space-y-3">
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="index.html" class="hover:text-white transition-colors">About</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-20 pt-10 border-t border-white/5 text-center text-[10px] font-bold text-neutral-600 uppercase tracking-widest">
+                © 2026 TRAINIQ. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/docs.js"></script>
+</body>
+</html>

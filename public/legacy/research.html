@@ -7,11 +7,11 @@
     <link rel="icon" type="image/png" href="media/logo.png">
     <link rel="shortcut icon" href="media/logo.png" type="image/x-icon">
     <meta name="description" content="Discover TrainIQ's flagship AI Research Assistant. Scrape, synthesize, and summarize web content using local LLMs." />
+    <meta name="keywords" content="AI Research, WebResearch Engine, LLM, Web Scraping, AI Assistant, TrainIQ" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="js/page-transition.js"></script>
     <script type="module" src="js/auth.js"></script>
     <style>
         body {
@@ -21,32 +21,30 @@
         }
     </style>
 </head>
-<body class="bg-black text-[#ececec] min-h-screen flex flex-col font-['Onest']">
+<body class="bg-black text-neutral-300 min-h-screen flex flex-col font-['Outfit']">
 
     <!-- Top Global Header (OpenAI Logo & Login style) -->
-    <header class="w-full h-16 flex items-center justify-between px-6 border-b border-neutral-800/50 bg-black fixed top-0 z-[2000]">
-        <div class="flex items-center gap-4">
-            <!-- Mobile Sidebar Toggle -->
-            <button id="sidebarToggle" class="lg:hidden text-neutral-400 hover:text-white transition-colors p-1" aria-label="Toggle sidebar">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            </button>
-            <a href="index.html" class="text-2xl font-bold tracking-tight text-white hover:text-neutral-300 transition-colors flex items-center gap-2">
-                <img src="media/logo.png" alt="TrainIQ" class="h-7 w-7" style="filter: invert(1); mix-blend-mode: screen;">
-                TrainIQ
-            </a>
-        </div>
-                <span class="text-xs text-neutral-500 hidden sm:inline">Search...</span>
-                <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono text-neutral-600 border border-neutral-700 rounded bg-neutral-800 ml-2">Ctrl K</kbd>
-            </button>
-            <a href="login.html" class="bg-white/10 hover:bg-white/20 text-white px-4 py-1.5 rounded-full text-sm font-medium transition-colors backdrop-blur-md border border-white/10">Log in</a>
-        </div>
+    <header class="fixed top-6 left-0 w-full z-[3000] px-6">
+        <nav class="max-w-4xl mx-auto bg-black/50 backdrop-blur-xl border border-white/10 px-6 py-3 flex items-center justify-between rounded-full">
+            <div class="flex items-center gap-2">
+                <img src="media/logo.png" alt="TrainIQ" class="h-8 w-8 object-contain invert brightness-200">
+                <span class="font-bold text-xl tracking-tighter text-white">TRAINIQ</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-400">
+                <a href="index.html" class="hover:text-white transition-colors">Product</a>
+                <a href="models.html" class="hover:text-white transition-colors">Technology</a>
+                <a href="research.html" class="text-white border-b border-white">Research</a>
+                <a href="blog.html" class="hover:text-white transition-colors">Experience</a>
+            </div>
+            <a href="signup.html" class="bg-white text-black px-5 py-2 rounded-full text-xs font-bold hover:bg-neutral-200 transition-all">Pre-Order Now</a>
+        </nav>
     </header>
 
     <!-- Main Application Layout -->
-    <div class="flex flex-1 mt-16 relative">
+    <div class="flex flex-1 mt-28 relative">
         
         <!-- Left Sidebar Navigation -->
-        <aside class="w-64 fixed left-0 top-16 bottom-0 overflow-y-auto bg-black border-r border-neutral-800/50 p-4 hidden lg:block custom-scrollbar z-40">
+        <aside class="w-64 fixed left-0 top-28 bottom-0 overflow-y-auto bg-black border-r border-white/5 p-4 hidden lg:block custom-scrollbar z-40">
             <a href="index.html" class="flex items-center gap-2 text-neutral-400 text-sm font-medium mb-8 hover:text-white transition-colors px-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 Back to Home
@@ -144,6 +142,39 @@ results = research(
             </div> -->
         </main>
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-black py-20 border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-6xl mx-auto text-center md:text-left">
+                <div class="md:col-span-2">
+                    <div class="flex items-center justify-center md:justify-start gap-2 mb-6">
+                        <img src="media/logo.png" alt="TrainIQ" class="h-6 w-6 object-contain invert brightness-200">
+                        <span class="font-bold text-lg tracking-tighter">TRAINIQ</span>
+                    </div>
+                    <p class="text-neutral-500 text-sm max-w-xs">End-to-end ML/DL pipelines with a single call. Support for tabular, image, text, and time-series data.</p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-white mb-6">Resources</h4>
+                    <ul class="text-neutral-500 text-sm space-y-3">
+                        <li><a href="faq.html" class="hover:text-white transition-colors">FAQs</a></li>
+                        <li><a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-white transition-colors">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-white mb-6">Company</h4>
+                    <ul class="text-neutral-500 text-sm space-y-3">
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="index.html" class="hover:text-white transition-colors">About</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-20 pt-10 border-t border-white/5 text-center text-[10px] font-bold text-neutral-600 uppercase tracking-widest">
+                © 2026 TRAINIQ. All rights reserved.
+            </div>
+        </div>
+    </footer>
 
     <script src="js/docs.js"></script>
 </body>

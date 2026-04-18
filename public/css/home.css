@@ -53,7 +53,7 @@ body {
   font-size: 1.1rem; font-weight: 700;
   letter-spacing: -0.02em; z-index: 2001;
 }
-.nav-logo img { height: 28px; width: 28px; }
+.nav-logo img { height: 28px; width: 28px; border-radius: 30px;}
 
 /* Menu Toggle */
 .nav-menu-toggle {
