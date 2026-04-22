@@ -140,6 +140,15 @@ export default function LegacyPage({ file }) {
 
         const doc = new DOMParser().parseFromString(html, 'text/html');
 
+        // Remove legacy navbar to avoid duplication with React Navbar
+        const legacyHeader = doc.body.querySelector('header');
+        if (legacyHeader) legacyHeader.remove();
+        
+        const standaloneGlassNav = doc.body.querySelector('.glass-nav');
+        if (standaloneGlassNav && standaloneGlassNav.tagName === 'NAV') {
+          standaloneGlassNav.remove();
+        }
+
         document.title = doc.title || 'TrainIQ';
         syncMetaTags(doc);
         applyBodyAttributes(doc.body);

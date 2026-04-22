@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import LegacyPage from './LegacyPage.jsx';
 import { resolveLegacyFile } from './legacyPages.js';
+import Navbar from './Navbar.jsx';
 
 export default function App() {
   const location = useLocation();
@@ -16,5 +17,10 @@ export default function App() {
     );
   }
 
-  return <LegacyPage file={file} />;
+  return (
+    <>
+      <Navbar />
+      <LegacyPage file={file} />
+    </>
+  );
 }
